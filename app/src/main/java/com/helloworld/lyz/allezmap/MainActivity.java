@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
                 MainActivity.this.startActivity(intent);
                 MainActivity.this.finish();
             }
-        }, 2000);
+        }, SPLASH_DELAY_MILLIS);
 
     }
 

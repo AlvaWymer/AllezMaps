@@ -24,6 +24,7 @@
         <activity android:name=".GuideActivity"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 
             />
         <activity android:name=".LoginActivity"
