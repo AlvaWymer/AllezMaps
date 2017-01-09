@@ -3,6 +3,7 @@ package com.helloworld.lyz.allezmap;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -69,10 +70,10 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
 
 
 
-
+        int d = Log.d("debug", "22222");
         // 初始化Adapter
         vpAdapter = new ViewPagerAdapter(views, this);
-
+         Log.d("debug", "111111");
         vp = (ViewPager) findViewById(R.id.viewpager);
         vp.setAdapter(vpAdapter);
         // 绑定回调
