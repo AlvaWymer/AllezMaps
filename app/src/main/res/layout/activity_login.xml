@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.helloworld.lyz.allezmap.LoginActivity">
+    tools:context="com.helloworld.lyz.allezmap.LoginActivity"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:text="login"
@@ -19,4 +20,12 @@
         android:layout_marginStart="101dp"
         android:layout_marginTop="142dp"
         android:id="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="语言"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
