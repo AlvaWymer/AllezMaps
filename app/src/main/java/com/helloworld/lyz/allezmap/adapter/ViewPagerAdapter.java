@@ -75,7 +75,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         ((ViewPager) arg0).addView(views.get(arg1), 0);
         if (arg1 == views.size() - 1) {
             ImageView mStartWeiboImageButton = (ImageView) arg0
-                    .findViewById(R.id.iv_start_weibo);
+                    .findViewById(R.id.guide_show_qua_image_view);
             mStartWeiboImageButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override

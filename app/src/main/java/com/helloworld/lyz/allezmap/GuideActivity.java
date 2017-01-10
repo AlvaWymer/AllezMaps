@@ -74,16 +74,16 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         // 初始化Adapter
         vpAdapter = new ViewPagerAdapter(views, this);
          Log.d("debug", "111111");
-        vp = (ViewPager) findViewById(R.id.viewpager);
+        vp = (ViewPager) findViewById(R.id.guide_viewpager);
         vp.setAdapter(vpAdapter);
         // 绑定回调
-        vp.setOnPageChangeListener(this);
-        //vp.addOnPageChangeListener(this);
+//        vp.setOnPageChangeListener(this);
+        vp.addOnPageChangeListener(this);
 
     }
 
     private void initDots() {
-        LinearLayout ll = (LinearLayout) findViewById(R.id.ll);
+        LinearLayout ll = (LinearLayout) findViewById(R.id.guide_linearlayout);
 
         dots = new ImageView[views.size()];
 
