@@ -1,24 +1,49 @@
 package com.helloworld.lyz.allezmap;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends Activity {
-
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
+    private Dialog mDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toast.makeText(LoginActivity.this, "GuideActivity", Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, "LoginActivity", Toast.LENGTH_LONG).show();
 
+        Button button = (Button) findViewById(R.id.but_login);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (mDialog == null) {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.dialog_select_lanuage,null);
+                    TextView english = (TextView) layout.findViewById(R.id.select_english);
+                    TextView chinese = (TextView) layout.findViewById(R.id.select_chinese);
+                    mDialog = new Dialog(LoginActivity.this, R.style.Custom_Dialog_Theme);
+                    mDialog.setCanceledOnTouchOutside(false);
+                    english.setOnClickListener(LoginActivity.this);
+                    chinese.setOnClickListener(LoginActivity.this);
+                    mDialog.setContentView(layout);
+                }
+                mDialog.show();
+            }
+        });
     }
+
+
 
     @Override
     protected void onStart() {
@@ -73,4 +98,25 @@ public class LoginActivity extends Activity {
             }).show();
         }
     }
+    @Override
+    public void onClick(View v) {
+        mDialog.dismiss();
+        switch (v.getId()) {
+            case R.id.select_english:
+                switchLanguage("en");
+                break;
+            case R.id.select_chinese:
+                switchLanguage("zh");
+                break;
+
+            default:
+                break;
+        }
+
+        //更新语言后，destroy当前页面，重新绘制
+        finish();
+        Intent it = new Intent(LoginActivity.this, LoginActivity.class);
+        startActivity(it);
+    }
+
 }

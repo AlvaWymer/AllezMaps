@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AllezMap</string>
+    <string name="login_language">yinyu</string>
+    <string name="login_network_cancel">bu</string>
+    <string name="login_network_message">shifoushezhi</string>
+    <string name="login_network_setting">settting_yingyu</string>
+    <string name="login_network_title">meiyouwangluo</string>
+</resources>

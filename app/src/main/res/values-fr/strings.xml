@@ -5,4 +5,5 @@
     <string name="login_network_message">vous sohaitai</string>
     <string name="login_network_title">Il n\'y pas le net</string>
     <string name="login_network_setting">settings</string>
+    <string name="login_language">language</string>
 </resources>
