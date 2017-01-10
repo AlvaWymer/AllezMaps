@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AllezMap</string>
+    <string name="login_network_cancel">Non</string>
+    <string name="login_network_message">vous sohaitai</string>
+    <string name="login_network_title">Il n\'y pas le net</string>
+    <string name="login_network_setting">settings</string>
+</resources>

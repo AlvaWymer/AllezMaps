@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AllezMap</string>
+    <string name="login_network_title">没有可用的网络</string>
+    <string name="login_network_message">是否对网络进行设置？</string>
+    <string name="login_network_setting">设置</string>
+    <string name="login_network_cancel">否</string>
 </resources>
