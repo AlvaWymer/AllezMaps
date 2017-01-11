@@ -16,10 +16,10 @@
         android:id="@+id/guide_show_qua_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="108dp"
         android:background="@drawable/guide_final_btn_entre"
-        android:focusable="true" />
+        android:focusable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -6,4 +6,5 @@
     <string name="login_network_message">shifoushezhi</string>
     <string name="login_network_setting">settting_yingyu</string>
     <string name="login_network_title">meiyouwangluo</string>
+    <string name="programm_head_welcome_and_name">Welcome to AllezMap！</string>
 </resources>

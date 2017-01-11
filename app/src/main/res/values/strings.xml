@@ -5,6 +5,17 @@
     <string name="login_network_setting">设置</string>
     <string name="login_network_cancel">否</string>
     <string name="login_language">语言</string>
+
+    <string name="programm_head_welcome_and_name">欢迎来到AllezMap！</string>
+
+
+
+
+
+
+
+
+
     <string name="title_activity_programme">ProgrammeActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

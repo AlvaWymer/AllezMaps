@@ -6,10 +6,10 @@
             android:id="@+id/nav_me"
             android:title="我"
             android:icon="@mipmap/ic_mine_gray_24"/>
-        <item
-            android:id="@+id/nav_friend"
-            android:title="好友"
-            android:icon="@mipmap/ic_friends_gray_24"/>
+        <!--<item-->
+            <!--android:id="@+id/nav_friend"-->
+            <!--android:title="好友"-->
+            <!--android:icon="@mipmap/ic_langage_gray_24"/>-->
         <item
             android:id="@+id/nav_notification"
             android:title="通知"
@@ -26,6 +26,11 @@
             android:id="@+id/nav_manage"
             android:title="应用管理"
             android:icon="@mipmap/ic_app_management_gray_24"/>
+        <item
+            android:id="@+id/nav_langage"
+            android:title="语言"
+            android:icon="@mipmap/ic_langage_gray_24"/>
+
     </group>
     <group
         android:checkableBehavior="none"
