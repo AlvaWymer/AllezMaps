@@ -16,7 +16,15 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 
-public class ProgrammeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener  {
+/**
+ * Created at 2017/1/11 20:24
+ *
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: ProgrammeActivity   程序主页面
+ */
+
+public class ProgrammeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ImageView mImageView;
 
@@ -24,10 +32,15 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programme);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        init();
+    }
+
+    public void init() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.program_activity_toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.program_activity_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -37,7 +50,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         mImageView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.ivAvatar);
-       // mImageView.setOnClickListener(this);
+        // mImageView.setOnClickListener(this);
 
         /**
          * 头像监听
@@ -50,11 +63,13 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
             }
         });
         ButterKnife.bind(this);
+
+
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.program_activity_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -89,7 +104,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         String string = null;
-        switch (id){
+        switch (id) {
             case R.id.nav_me:
                 string = "我";
                 break;
@@ -112,28 +127,29 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 string = "通知";
                 break;
             case R.id.nav_setting:
-                string= "设置";
+                string = "设置";
                 break;
             case R.id.nav_suggestion:
                 string = "意见反馈";
                 break;
             case R.id.nav_theme:
                 string = "主题风格";
-                zhuti( string);
+                zhuti(string);
                 break;
         }
-        if (!TextUtils.isEmpty(string)){
-            Toast.makeText(ProgrammeActivity.this, "你点击了"+string, Toast.LENGTH_LONG).show();
+        if (!TextUtils.isEmpty(string)) {
+            Toast.makeText(ProgrammeActivity.this, "你点击了" + string, Toast.LENGTH_LONG).show();
 
 
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.program_activity_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
     }
-    public  void zhuti(String string){
-        Toast.makeText(ProgrammeActivity.this, "你点击了--方法"+string, Toast.LENGTH_LONG).show();
+
+    public void zhuti(String string) {
+        Toast.makeText(ProgrammeActivity.this, "你点击了--方法" + string, Toast.LENGTH_LONG).show();
 
     }
 
@@ -144,7 +160,6 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 //            startActivity(intent);
 //        }
 //    }
-
 
 
 //    @OnClick(R.id.snackbar)

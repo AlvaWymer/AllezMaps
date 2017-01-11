@@ -15,24 +15,14 @@ import com.helloworld.lyz.allezmap.adapter.ViewPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 /**
+ * Created at 2017/1/11 20:11
  *
- *  GuideActivity.java Create on 2013-5-2 下午10:59:08
- *
- *     class desc: 引导界面
- *
- *     <p>
- *     Copyright: Copyright(c) 2013
- *     </p>
  * @Version 1.0
- * @Author <a href="mailto:gaolei_xj@163.com">Leo</a>
- *
- *
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: GuideActivity  导航页面
  */
+
 public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener {
 
     private ViewPager vp;
@@ -48,14 +38,13 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //添加guide页面
         setContentView(R.layout.activity_guide);
         Toast.makeText(GuideActivity.this, "GuideActivity", Toast.LENGTH_LONG).show();
         // 初始化页面
         initViews();
-
         // 初始化底部小点
         initDots();
-
     }
 
     private void initViews() {
@@ -69,19 +58,19 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         views.add(inflater.inflate(R.layout.activity_guide_show_qua, null));
 
 
-
         int d = Log.d("debug", "22222");
         // 初始化Adapter
         vpAdapter = new ViewPagerAdapter(views, this);
-         Log.d("debug", "111111");
+        Log.d("debug", "111111");
         vp = (ViewPager) findViewById(R.id.guide_viewpager);
         vp.setAdapter(vpAdapter);
         // 绑定回调
-//        vp.setOnPageChangeListener(this);
+//      vp.setOnPageChangeListener(this);//已过时
         vp.addOnPageChangeListener(this);
 
     }
 
+    //初始化底部小点 方法
     private void initDots() {
         LinearLayout ll = (LinearLayout) findViewById(R.id.guide_linearlayout);
 

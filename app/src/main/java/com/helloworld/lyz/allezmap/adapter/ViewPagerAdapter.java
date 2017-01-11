@@ -14,7 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.helloworld.lyz.allezmap.LoginActivity;
+import com.helloworld.lyz.allezmap.ProgrammeActivity;
 import com.helloworld.lyz.allezmap.R;
 
 import java.util.List;
@@ -93,7 +93,8 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     private void goHome() {
         // 跳转
-        Intent intent = new Intent(activity, LoginActivity.class);
+//        Intent intent = new Intent(activity, LoginActivity.class);
+        Intent intent = new Intent(activity, ProgrammeActivity.class);
         activity.startActivity(intent);
         activity.finish();
     }

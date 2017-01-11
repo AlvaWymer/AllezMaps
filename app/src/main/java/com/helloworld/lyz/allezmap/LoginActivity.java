@@ -14,10 +14,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Created at 2017/1/11 20:15
+ *
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: LoginActivity  登录界面
+ */
 
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private Dialog mDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +39,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void onClick(View v) {
                 if (mDialog == null) {
                     LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.dialog_select_lanuage,null);
+                    View layout = inflater.inflate(R.layout.dialog_select_lanuage, null);
                     TextView english = (TextView) layout.findViewById(R.id.select_english);
                     TextView chinese = (TextView) layout.findViewById(R.id.select_chinese);
                     mDialog = new Dialog(LoginActivity.this, R.style.Custom_Dialog_Theme);
@@ -46,7 +54,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
-
+    //首次启动时  检测网络状态
     @Override
     protected void onStart() {
         NetWorkStatus();
@@ -54,11 +62,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
-    // 判断网络连接
+    // 判断网络连接 方法
     public void NetWorkStatus() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         connectivityManager.getActiveNetworkInfo();
-
 
         boolean netSataus = true;
         if (connectivityManager.getActiveNetworkInfo() != null) {
@@ -69,7 +76,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     .setMessage(R.string.login_network_message);
             aler_builder.setPositiveButton(R.string.login_network_setting, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-					/* Intent mIntent = new Intent("/"); */
+                    /* Intent mIntent = new Intent("/"); */
                     /**
                      * 判断手机系统的版本！如果API大于10 就是3.0+
                      * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
@@ -100,6 +107,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }).show();
         }
     }
+
+    //重写 onclick方法
     @Override
     public void onClick(View v) {
         mDialog.dismiss();
@@ -117,8 +126,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         //更新语言后，destroy当前页面，重新绘制
         finish();
-        Intent it = new Intent(LoginActivity.this, LoginActivity.class);
-        startActivity(it);
+        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
 }

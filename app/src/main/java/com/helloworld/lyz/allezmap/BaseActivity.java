@@ -10,14 +10,13 @@ import com.helloworld.lyz.allezmap.util.PreferenceUtil;
 
 import java.util.Locale;
 /**
- *
- *
- *
- * Created at 2017/1/11 18:24
+ * Created at 2017/1/11 20:09
  * @Version 1.0
- * @author paul (yangnaihua.2008@163.com)
- * class desc:基础类
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: BaseActivity  国际化基础类
+ *
  */
+
 public class BaseActivity extends AppCompatActivity {
 	
 	@Override
@@ -36,17 +35,15 @@ public class BaseActivity extends AppCompatActivity {
         Configuration config = resources.getConfiguration();
         DisplayMetrics dm = resources.getDisplayMetrics();
        if (language.equals("en")) {
-//            config.locale = Locale.ENGLISH;//本地语言
+//            config.locale = Locale.ENGLISH;//本地语言--已过时
            config.setLocale(Locale.ENGLISH);
         } else {
            config.setLocale(Locale.SIMPLIFIED_CHINESE);
-//        	 config.locale = Locale.SIMPLIFIED_CHINESE;
+//        	 config.locale = Locale.SIMPLIFIED_CHINESE;// 已过时
         }
 
-//resources.overrideConfiguration
 
         resources.updateConfiguration(config, dm);
-//        resources.cr
 
 
         //保存设置语言的类型
