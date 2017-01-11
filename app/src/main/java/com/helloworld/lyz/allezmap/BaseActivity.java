@@ -1,16 +1,24 @@
 package com.helloworld.lyz.allezmap;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
 import com.helloworld.lyz.allezmap.util.PreferenceUtil;
 
 import java.util.Locale;
-
-public class BaseActivity extends Activity {
+/**
+ *
+ *
+ *
+ * Created at 2017/1/11 18:24
+ * @Version 1.0
+ * @author paul (yangnaihua.2008@163.com)
+ * class desc:基础类
+ */
+public class BaseActivity extends AppCompatActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

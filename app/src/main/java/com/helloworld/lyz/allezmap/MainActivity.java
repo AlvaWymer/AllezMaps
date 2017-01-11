@@ -19,9 +19,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(MainActivity.this, "MainActivity", Toast.LENGTH_LONG).show();
-
         init();
     }
+
   public void init() {
 
 
@@ -45,7 +45,8 @@ public class MainActivity extends Activity {
     private void goHome() {
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProgrammeActivity.class);
                 MainActivity.this.startActivity(intent);
                 MainActivity.this.finish();
             }
