@@ -4,7 +4,11 @@
     <string name="login_language">yinyu</string>
     <string name="login_network_cancel">bu</string>
     <string name="login_network_message">shifoushezhi</string>
-    <string name="login_network_setting">settting_yingyu</string>
     <string name="login_network_title">meiyouwangluo</string>
-    <string name="programm_head_welcome_and_name">Welcome to AllezMap！</string>
+    <string name="programm_head_welcome_and_name">Welcome to AllezMap!</string>
+    <string name="program_it_about">About</string>
+    <string name="program_it_compte">Your Account</string>
+    <string name="login_network_setting">Setting</string>
+    <string name="program_it_language">Language</string>
+    <string name="program_it_setting">Setting</string>
 </resources>

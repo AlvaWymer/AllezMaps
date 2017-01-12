@@ -61,7 +61,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         int d = Log.d("debug", "22222");
         // 初始化Adapter
         vpAdapter = new ViewPagerAdapter(views, this);
-        Log.d("debug", "111111");
+Log.d("debug", "111111");
         vp = (ViewPager) findViewById(R.id.guide_viewpager);
         vp.setAdapter(vpAdapter);
         // 绑定回调

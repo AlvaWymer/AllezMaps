@@ -4,13 +4,16 @@
     <string name="login_network_message">是否对网络进行设置？</string>
     <string name="login_network_setting">设置</string>
     <string name="login_network_cancel">否</string>
-    <string name="login_language">语言</string>
+
+    <string name="login_language">语言</string><!--到时候删除-->
 
     <string name="programm_head_welcome_and_name">欢迎来到AllezMap！</string>
 
-
-
-
+    <!-- 程序首页栏目-->
+    <string name="program_it_about">关于</string>
+    <string name="program_it_compte">我的账户</string>
+    <string name="program_it_language">语言</string>
+    <string name="program_it_setting">设置</string>
 
 
 

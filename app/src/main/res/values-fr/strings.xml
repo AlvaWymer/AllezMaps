@@ -4,7 +4,11 @@
     <string name="login_network_cancel">Non</string>
     <string name="login_network_message">vous sohaitai</string>
     <string name="login_network_title">Il n\'y pas le net</string>
-    <string name="login_network_setting">settings</string>
+    <string name="login_network_setting">Paramètres</string>
     <string name="login_language">language</string>
-    <string name="programm_head_welcome_and_name">bonjour</string>
+    <string name="programm_head_welcome_and_name">Bienvenu à AllezMap!</string>
+    <string name="program_it_about">À propos</string>
+    <string name="program_it_compte">Votre compte</string>
+    <string name="program_it_language">Langage</string>
+    <string name="program_it_setting">Paramètres</string>
 </resources>
