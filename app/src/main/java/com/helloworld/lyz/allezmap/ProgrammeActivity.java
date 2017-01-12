@@ -1,6 +1,7 @@
 package com.helloworld.lyz.allezmap;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,10 +14,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
@@ -29,10 +32,10 @@ import butterknife.ButterKnife;
  * @desc: ProgrammeActivity   程序主页面
  */
 
-public class ProgrammeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ProgrammeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private ImageView mImageView;
-
+    private Dialog mDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +121,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 break;
             case R.id.nav_langage:
                 string = "语言";
+
+                langage_set();
                 break;
             case R.id.nav_manage:
                 string = "通知";
@@ -139,7 +144,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 break;
             case R.id.nav_theme:
                 string = "主题风格";
-                zhuti(string);
+//                zhuti(string);
                 break;
         }
         if (!TextUtils.isEmpty(string)) {
@@ -153,10 +158,66 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
     }
 
-    public void zhuti(String string) {
-        Toast.makeText(ProgrammeActivity.this, "你点击了--方法" + string, Toast.LENGTH_LONG).show();
+    public  void langage_set(){
+        Toast.makeText(ProgrammeActivity.this, "语言dialog", Toast.LENGTH_LONG).show();
+        if (mDialog == null) {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.dialog_select_lanuage, null);
+
+            TextView english = (TextView) layout.findViewById(R.id.dialog_select_english);
+            TextView chinese = (TextView) layout.findViewById(R.id.dialog_select_chinese);
+            TextView french = (TextView) layout.findViewById(R.id.dialog_select_french);
+
+            mDialog = new Dialog(ProgrammeActivity.this, R.style.Custom_Dialog_Theme);
+            mDialog.setCanceledOnTouchOutside(false);
+
+
+            english.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(ProgrammeActivity.this, "你点击了english", Toast.LENGTH_LONG).show();
+                    switchLanguage("en");
+                    draw();
+                }
+            });
+            chinese.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(ProgrammeActivity.this, "你点击了中文", Toast.LENGTH_LONG).show();
+                    switchLanguage("zh");
+
+                    draw();
+                }
+            });
+            french.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(ProgrammeActivity.this, "你点击了法语", Toast.LENGTH_LONG).show();
+                    switchLanguage("fr");
+                    draw();
+                }
+            });
+
+            mDialog.setContentView(layout);
+        }
+        mDialog.show();
+
 
     }
+
+    //当选择语言之后，重新绘制activity
+    public void draw(){
+        //更新语言后，destroy当前页面，重新绘制
+        finish();
+        Intent intent = new Intent(ProgrammeActivity.this, ProgrammeActivity.class);
+        startActivity(intent);
+    }
+
+
+//    public void zhuti(String string) {
+//        Toast.makeText(ProgrammeActivity.this, "你点击了--方法" + string, Toast.LENGTH_LONG).show();
+//
+//    }
 
     //首次启动时  检测网络状态
     @Override
@@ -209,13 +270,28 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
             }).show();
         }
     }
-//    @Override
-//    public void onClick(View v) {
+
+    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.Button03:
+//                Intent intent = new Intent(mainActivity.this, fristActivity.class);
+//                intent.putExtra("data", "mainActivity");
+//                startActivity(intent);
+//                break;
+//            case R.id.Button02:
+//                Intent intent = new Intent(mainActivity.this, loginActivity.class);
+//                intent.putExtra("data", "mainActivity");
+//                startActivity(intent);
+//                break;
+//            default:
+//                break;
+//        }
 //        if(v.getId()==R.id.ivAvatar){
 //            Intent intent = new Intent(this,Login2Activity.class);
 //            startActivity(intent);
 //        }
-//    }
+    }
+
 
 
 //    @OnClick(R.id.snackbar)

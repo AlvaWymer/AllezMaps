@@ -2,51 +2,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#151515" >
-
-    <TextView
-        android:id="@+id/clear_cache_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:text="更改语言"
-        android:textColor="#36a315"
-        android:textSize="18sp" />
+    android:background="@color/colorPrimary" >
 
     <TextView
         android:id="@+id/clear_cache_line"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="2dp"
-        android:layout_below="@+id/clear_cache_title"
-        android:background="#36a315" />
-
-    <TextView
-        android:id="@+id/select_english"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/clear_cache_line"
-        android:padding="15dp"
-        android:text="english"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/dialog_select_french"
+        android:background="@android:color/white" />
 
     <TextView
         android:id="@+id/clear_cache_line_1"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="2dp"
-        android:layout_below="@+id/select_english"
-        android:background="#121212" />
+        android:layout_below="@+id/dialog_select_english"
+        android:background="@android:color/white" />
 
     <TextView
-        android:id="@+id/select_chinese"
-        android:layout_width="match_parent"
+        android:id="@+id/dialog_select_chinese"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/clear_cache_line_1"
         android:padding="15dp"
         android:text="中文"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/clear_cache_line_1"
+        android:layout_alignParentStart="true"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/dialog_select_english"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="english"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/clear_cache_line"
+        android:layout_alignParentStart="true"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/dialog_select_french"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Français"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"/>
 
 </RelativeLayout>

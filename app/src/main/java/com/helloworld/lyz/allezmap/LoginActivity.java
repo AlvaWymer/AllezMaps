@@ -40,8 +40,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (mDialog == null) {
                     LayoutInflater inflater = getLayoutInflater();
                     View layout = inflater.inflate(R.layout.dialog_select_lanuage, null);
-                    TextView english = (TextView) layout.findViewById(R.id.select_english);
-                    TextView chinese = (TextView) layout.findViewById(R.id.select_chinese);
+                    TextView english = (TextView) layout.findViewById(R.id.dialog_select_english);
+                    TextView chinese = (TextView) layout.findViewById(R.id.dialog_select_chinese);
                     mDialog = new Dialog(LoginActivity.this, R.style.Custom_Dialog_Theme);
                     mDialog.setCanceledOnTouchOutside(false);
                     english.setOnClickListener(LoginActivity.this);
@@ -113,10 +113,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         mDialog.dismiss();
         switch (v.getId()) {
-            case R.id.select_english:
+            case R.id.dialog_select_english:
                 switchLanguage("en");
                 break;
-            case R.id.select_chinese:
+            case R.id.dialog_select_chinese:
                 switchLanguage("zh");
                 break;
 

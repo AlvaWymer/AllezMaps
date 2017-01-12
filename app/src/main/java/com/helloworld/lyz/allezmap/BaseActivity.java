@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
 
 import com.helloworld.lyz.allezmap.util.PreferenceUtil;
@@ -17,7 +18,7 @@ import java.util.Locale;
  *
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements SearchView.OnCloseListener{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,14 @@ public class BaseActivity extends AppCompatActivity {
        if (language.equals("en")) {
 //            config.locale = Locale.ENGLISH;//本地语言--已过时
            config.setLocale(Locale.ENGLISH);
-        } else {
+        } else if (language.equals("fr")){
+            config.setLocale(Locale.FRANCE);
+        }else{
            config.setLocale(Locale.SIMPLIFIED_CHINESE);
 //        	 config.locale = Locale.SIMPLIFIED_CHINESE;// 已过时
-        }
+
+
+       }
 
 
         resources.updateConfiguration(config, dm);
@@ -48,5 +53,10 @@ public class BaseActivity extends AppCompatActivity {
 
         //保存设置语言的类型
         PreferenceUtil.commitString("language", language);
+    }
+
+    @Override
+    public boolean onClose() {
+        return false;
     }
 }
