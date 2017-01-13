@@ -1,133 +1,174 @@
 package com.helloworld.lyz.allezmap;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
-
 /**
- * Created at 2017/1/11 20:15
- *
- * @Version 1.0
- * @Author paul (yangnaihua.2008at163.com)
- * @desc: LoginActivity  登录界面
+ * Created by JohnTsai on 16/1/31.
  */
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
-    private Dialog mDialog;
+    private EditText mEditTextName;
+    private EditText mEditTextPassword;
+    private Button mLoginButton;
+    private TextInputLayout mTextInputLayoutName;
+    private TextInputLayout mTextInputLayoutPswd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toast.makeText(LoginActivity.this, "LoginActivity", Toast.LENGTH_LONG).show();
 
-        Button button = (Button) findViewById(R.id.but_login);
-        button.setOnClickListener(new View.OnClickListener() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.login_bar_title);
+
+
+        //给左上角图标的左边加上一个返回的图标
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //使左上角图标是否显示，如果设成false，则没有程序图标，仅仅就个标题，否则，显示应用程序图标，
+        actionBar.setDisplayShowHomeEnabled(true);
+
+        mTextInputLayoutName= (TextInputLayout) findViewById(R.id.Login_text_input_layout_name);
+        mTextInputLayoutPswd = (TextInputLayout) findViewById(R.id.Login_text_input_layout_password);
+
+        mEditTextName = (EditText) findViewById(R.id.login_editText_name);
+        mTextInputLayoutName.setErrorEnabled(true);
+        mEditTextPassword = (EditText) findViewById(R.id.login_editText_password);
+        mTextInputLayoutPswd.setErrorEnabled(true);
+
+        mLoginButton = (Button) findViewById(R.id.login_button_login);
+        mLoginButton.setOnClickListener(this);
+        mEditTextName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
 
             @Override
-            public void onClick(View v) {
-                if (mDialog == null) {
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.dialog_select_lanuage, null);
-                    TextView english = (TextView) layout.findViewById(R.id.dialog_select_english);
-                    TextView chinese = (TextView) layout.findViewById(R.id.dialog_select_chinese);
-                    mDialog = new Dialog(LoginActivity.this, R.style.Custom_Dialog_Theme);
-                    mDialog.setCanceledOnTouchOutside(false);
-                    english.setOnClickListener(LoginActivity.this);
-                    chinese.setOnClickListener(LoginActivity.this);
-                    mDialog.setContentView(layout);
-                }
-                mDialog.show();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                checkName(s.toString(),false);
+            }
+        });
+
+        mEditTextPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                checkPswd(s.toString(),false);
             }
         });
     }
 
-
-    //首次启动时  检测网络状态
     @Override
-    protected void onStart() {
-        NetWorkStatus();
-        super.onStart();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.login, menu);
+        return true;
     }
 
+    //对应的menu目录下面的login.xml文件中的item   选择事件
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-    // 判断网络连接 方法
-    public void NetWorkStatus() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        connectivityManager.getActiveNetworkInfo();
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                finish();
+//                break;
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(this,"点击了查找按钮",Toast.LENGTH_SHORT).show();
+                break;
 
-        boolean netSataus = true;
-        if (connectivityManager.getActiveNetworkInfo() != null) {
-            netSataus = connectivityManager.getActiveNetworkInfo().isAvailable();
-        } else {
-            AlertDialog.Builder aler_builder = new AlertDialog.Builder(this)
-                    .setIcon(R.mipmap.ic_launcher).setTitle(R.string.login_network_title)
-                    .setMessage(R.string.login_network_message);
-            aler_builder.setPositiveButton(R.string.login_network_setting, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    /* Intent mIntent = new Intent("/"); */
-                    /**
-                     * 判断手机系统的版本！如果API大于10 就是3.0+
-                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                     */
-
-                    Intent intent = null;
-                    /**
-                     * 判断手机系统的版本！如果API大于10 就是3.0+
-                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                     */
-                    if (android.os.Build.VERSION.SDK_INT > 10) {
-                        intent = new Intent(
-                                android.provider.Settings.ACTION_WIFI_SETTINGS);
-                    } else {
-                        intent = new Intent();
-                        ComponentName component = new ComponentName(
-                                "com.android.settings",
-                                "com.android.settings.WirelessSettings");
-                        intent.setComponent(component);
-                        intent.setAction("android.intent.action.VIEW");
-                    }
-                    startActivity(intent);
-                }
-            }).setNeutralButton(R.string.login_network_cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    dialog.cancel();
-                }
-            }).show();
         }
+//        return true;
+//        //
+//        if(item.getItemId()==R.id.action_settings){
+//            Toast.makeText(this,"点击了查找按钮",Toast.LENGTH_SHORT).show();
+//
+//
+//        }
+//        if(item.getItemId()==android.R.id.home) {
+//            finish();
+//            return true;
+//        }
+        return super.onOptionsItemSelected(item);
     }
 
-    //重写 onclick方法
     @Override
     public void onClick(View v) {
-        mDialog.dismiss();
-        switch (v.getId()) {
-            case R.id.dialog_select_english:
-                switchLanguage("en");
-                break;
-            case R.id.dialog_select_chinese:
-                switchLanguage("zh");
-                break;
-
-            default:
-                break;
+        if(v.getId()==R.id.login_button_login){
+            hideKeyBoard();
+            if(!checkName(mEditTextName.getText(),true))
+                return;
+            if(!checkPswd(mEditTextPassword.getText(),true))
+                return;
+            Toast.makeText(this,"登录成功",Toast.LENGTH_SHORT).show();
+            finish();
         }
-
-        //更新语言后，destroy当前页面，重新绘制
-        finish();
-        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-        startActivity(intent);
     }
 
+    private boolean checkPswd(CharSequence pswd,boolean isLogin) {
+        if(TextUtils.isEmpty(pswd)) {
+            if(isLogin) {
+                mTextInputLayoutPswd.setError("mima ");
+                return false;
+            }
+        }else{
+            mTextInputLayoutPswd.setError(null);
+        }
+        return true;
+    }
+
+    private boolean checkName(CharSequence name,boolean isLogin) {
+        if(TextUtils.isEmpty(name)) {
+            if(isLogin) {
+                mTextInputLayoutName.setError("zhanghu");
+                return false;
+            }
+        }else{
+            mTextInputLayoutName.setError(null);
+        }
+        return true;
+    }
+
+    private void hideKeyBoard() {
+        View view = getCurrentFocus();
+        if(view!=null){
+            ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(view.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+
+    }
+    public void doThis(MenuItem item){
+        Toast.makeText(this, "Hello World", Toast.LENGTH_LONG).show();
+    }
 }

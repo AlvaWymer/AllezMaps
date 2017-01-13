@@ -24,19 +24,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--引导页面-->
         <activity
             android:name=".GuideActivity"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login2Activity"
             android:configChanges="keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <!---->
+        <!--程序主页面-->
         <activity
             android:name=".ProgrammeActivity"
             android:label="@string/title_activity_programme"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- 登陆页面-->
+        <activity android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+           />
     </application>
 
 </manifest>

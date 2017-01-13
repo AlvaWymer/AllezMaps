@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+    <!--隐藏掉了登录主页面 actionbar 右边的item-->
+    <!--<item-->
+    <!--android:id="@+id/action_settings"-->
+        <!--android:orderInCategory="100"-->
+    <!--android:icon="@mipmap/ic_search_white_24dp"-->
+    <!--android:title=""-->
+    <!--app:showAsAction="always"-->
+    <!--/>-->
+
+</menu>

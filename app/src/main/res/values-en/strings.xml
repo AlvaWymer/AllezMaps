@@ -12,4 +12,8 @@
     <string name="program_it_language">Language</string>
     <string name="program_it_setting">Setting</string>
     <string name="program_it_exit">Log Out</string>
+    <string name="action_settings"></string>
+    <string name="login_hint_name">Name</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_btn_hint_login">Sign in</string>
 </resources>
