@@ -130,8 +130,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
                 langage_set();
                 break;
-            case R.id.nav_manage:
-                string = "通知";
+            case R.id.nav_share:
+                string = "一键分享";
                 break;
             case R.id.nav_message:
                 string = "私信";
