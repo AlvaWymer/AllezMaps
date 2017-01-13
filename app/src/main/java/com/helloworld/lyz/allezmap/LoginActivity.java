@@ -175,6 +175,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // 获取屏幕高度
         int height = display.getHeight();
         if (check.equals("checkname")) {
+
             toast = Toast.makeText(this, R.string.login_error_name, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, height / number);
 
