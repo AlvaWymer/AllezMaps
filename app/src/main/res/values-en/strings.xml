@@ -11,4 +11,5 @@
     <string name="login_network_setting">Setting</string>
     <string name="program_it_language">Language</string>
     <string name="program_it_setting">Setting</string>
+    <string name="program_it_exit">Log Out</string>
 </resources>

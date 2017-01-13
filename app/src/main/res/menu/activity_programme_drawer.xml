@@ -11,8 +11,8 @@
             <!--android:title="好友"-->
             <!--android:icon="@mipmap/ic_langage_gray_24"/>-->
         <item
-            android:id="@+id/nav_notification"
-            android:title="通知"
+            android:id="@+id/nav_exit"
+            android:title="@string/program_it_exit"
             android:icon="@mipmap/ic_notification_gray_24"/>
         <item
             android:id="@+id/nav_message"

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -42,6 +43,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         setContentView(R.layout.activity_programme);
 
         init();
+
     }
 
     public void init() {
@@ -55,6 +57,10 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //取消navigation的bar滑动效果
+        disableNavigationViewScrollbars(navigationView);
+
+
         navigationView.setNavigationItemSelectedListener(this);
 
         mImageView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.ivAvatar);
@@ -133,7 +139,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
             case R.id.nav_night:
                 string = "夜间模式";
                 break;
-            case R.id.nav_notification:
+            case R.id.nav_exit:
                 string = "通知";
                 break;
             case R.id.nav_setting:
@@ -271,6 +277,15 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         }
     }
 
+    //取消navigation的bar滑动效果
+    private void disableNavigationViewScrollbars(NavigationView navigationView) {
+        if (navigationView != null) {
+            NavigationMenuView navigationMenuView = (NavigationMenuView) navigationView.getChildAt(0);
+            if (navigationMenuView != null) {
+                navigationMenuView.setVerticalScrollBarEnabled(false);
+            }
+        }
+    }
     public void onClick(View v) {
 //        switch (v.getId()) {
 //            case R.id.Button03:

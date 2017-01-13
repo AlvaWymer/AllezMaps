@@ -11,4 +11,5 @@
     <string name="program_it_compte">Votre compte</string>
     <string name="program_it_language">Langage</string>
     <string name="program_it_setting">Paramètres</string>
+    <string name="program_it_exit">Déconnexion</string>
 </resources>
