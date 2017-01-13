@@ -16,4 +16,10 @@
     <string name="login_btn_hint_login">Identifiez-vous</string>
     <string name="login_hint_password">Mot de passe</string>
     <string name="action_settings"></string>
+    <string name="login_btn_hint_find">Mot de passe oublié</string>
+    <string name="title_activity_programme">AllezMap</string>
+    <string name="login_bar_title">Identifiez-vous</string>
+    <string name="program_it_share">Partager</string>
+    <string name="login_error_name"> Veuillez saisir un identifiant valide</string>
+    <string name="login_error_pass">Veuillez saisir un mot de passe valide</string>
 </resources>

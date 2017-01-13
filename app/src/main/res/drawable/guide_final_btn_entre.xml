@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--引导最后一页   点击进入主程序-->
     <item android:drawable="@drawable/guide_final_btn_pressed" android:state_pressed="true" />
     <item android:drawable="@drawable/guide_final_btn_unpress" />
 </selector>

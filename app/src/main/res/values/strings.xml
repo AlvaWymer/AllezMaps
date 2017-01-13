@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">AllezMap</string>
+    <!--程序主页面的标题栏-->
+    <string name="title_activity_programme">AllezMap</string>
+
+    <!--检测网络-->
     <string name="login_network_title">没有可用的网络</string>
     <string name="login_network_message">是否对网络进行设置？</string>
     <string name="login_network_setting">设置</string>
@@ -7,7 +11,10 @@
 
     <string name="login_language">语言</string><!--到时候删除-->
 
+    <!--程序主页面-菜单栏-头像下方 欢迎语句-->
     <string name="programm_head_welcome_and_name">欢迎来到AllezMap！</string>
+
+    <string name="programm_many_times_close">再按一次退出程序</string>
 
     <!-- 程序首页栏目-->
     <string name="program_it_about">关于</string>
@@ -16,18 +23,27 @@
     <string name="program_it_setting">设置</string>
     <string name="program_it_exit">退出</string>
 
+    <string name="program_it_share">一键分享</string>
+
+
 
     <!--登陆模块-->
+    <string name="login_bar_title">登陆页面</string>
     <string name="login_hint_name">用户名</string>
     <string name="login_hint_password">密码</string>
     <string name="login_btn_hint_login">登陆</string>
-    <string name="login_bar_title">登陆页面</string>
-    <!--<string name="hint_name">用户名/Email/手机号</string>-->
+    <string name="login_btn_hint_find">找回密码</string>
 
-    <string name="title_activity_programme">ProgrammeActivity</string>
+    <string name="login_error_name">账户不能为空</string>
+    <string name="login_error_pass">密码不能为空</string>
+
+
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
 
     <string name="action_settings">设置</string>
 </resources>

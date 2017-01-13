@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     // 程序刚启动时启动页面显示的时间
-    private static final long SPLASH_DELAY_MILLIS = 000;
+    private static final long SPLASH_DELAY_MILLIS = 2000;
     //Sharepreferences 名称
     private static final String SHAREDPREFERENCES_NAME = "first_pref";
 

@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +38,10 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
     private ImageView mImageView;
     private Dialog mDialog;
+    private long mExitTime;
+
+    // 双击返回按钮 退出应用的时间
+    private static final long SIGNOUT_DELAY_MILLIS = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,23 +247,23 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         } else {
             AlertDialog.Builder aler_builder = new AlertDialog.Builder(this)
                     .setIcon(R.mipmap.ic_launcher).setTitle(R.string.login_network_title)
-                    .setMessage(R.string.login_network_message);
-            aler_builder.setPositiveButton(R.string.login_network_setting, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
+                                .setMessage(R.string.login_network_message);
+                        aler_builder.setPositiveButton(R.string.login_network_setting, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
                     /* Intent mIntent = new Intent("/"); */
-                    /**
-                     * 判断手机系统的版本！如果API大于10 就是3.0+
-                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                     */
+                                /**
+                                 * 判断手机系统的版本！如果API大于10 就是3.0+
+                                 * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
+                                 */
 
-                    Intent intent = null;
-                    /**
-                     * 判断手机系统的版本！如果API大于10 就是3.0+
-                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                     */
-                    if (android.os.Build.VERSION.SDK_INT > 10) {
-                        intent = new Intent(
-                                android.provider.Settings.ACTION_WIFI_SETTINGS);
+                                Intent intent = null;
+                                /**
+                                 * 判断手机系统的版本！如果API大于10 就是3.0+
+                                 * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
+                                 */
+                                if (android.os.Build.VERSION.SDK_INT > 10) {
+                                    intent = new Intent(
+                                            android.provider.Settings.ACTION_WIFI_SETTINGS);
                     } else {
                         intent = new Intent();
                         ComponentName component = new ComponentName(
@@ -285,6 +290,22 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 navigationMenuView.setVerticalScrollBarEnabled(false);
             }
         }
+    }
+
+    // 实现了再按一次退出功能
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > SIGNOUT_DELAY_MILLIS) {
+                Object mHelperUtils;
+                Toast.makeText(this, R.string.programm_many_times_close, Toast.LENGTH_SHORT).show();//不能删除
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
     public void onClick(View v) {
 //        switch (v.getId()) {

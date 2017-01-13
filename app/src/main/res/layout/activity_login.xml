@@ -51,6 +51,7 @@
                 android:textColorHint="@color/colorGray"
                 />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/Login_text_input_layout_password"
             android:layout_width="match_parent"
@@ -69,6 +70,14 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
+        <!--<CheckBox-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="记住密码"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:background="@color/colorPrimary"/>-->
         <!--android:textAllCaps="false"  取消自动变为大写-->
         <Button
             android:id="@+id/login_button_login"
@@ -82,5 +91,18 @@
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textAllCaps="false"/>
+        <Button
+            android:id="@+id/login_button_find"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/login_btn_hint_find"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textAllCaps="false"/>
     </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>
