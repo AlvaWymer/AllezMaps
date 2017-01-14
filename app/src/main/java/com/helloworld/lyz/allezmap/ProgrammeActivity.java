@@ -129,6 +129,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 break;
             case R.id.nav_about:
                 string = "关于";
+                Intent intent = new Intent(ProgrammeActivity.this, AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_langage:
                 string = "语言";

@@ -112,17 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
         }
-//        return true;
-//        //
-//        if(item.getItemId()==R.id.action_settings){
-//            Toast.makeText(this,"点击了查找按钮",Toast.LENGTH_SHORT).show();
-//
-//
-//        }
-//        if(item.getItemId()==android.R.id.home) {
-//            finish();
-//            return true;
-//        }
+
         return super.onOptionsItemSelected(item);
     }
 

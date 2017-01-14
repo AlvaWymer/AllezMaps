@@ -26,7 +26,6 @@
     <string name="program_it_share">一键分享</string>
 
 
-
     <!--登陆模块-->
     <string name="login_bar_title">登陆页面</string>
     <string name="login_hint_name">用户名</string>
@@ -39,10 +38,13 @@
 
 
 
+    <!--关于模块-->
+    <string name="about_title">关于</string>
+
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
 
 
     <string name="action_settings">设置</string>
