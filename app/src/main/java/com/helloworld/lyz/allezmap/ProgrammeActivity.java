@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenuView;
@@ -13,6 +14,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -46,12 +48,17 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     private MenuItem menuItem;
     private NavigationView navigationView;
 
+    private boolean isNight;
+    private SharedPreferences sp;
+
     // 双击返回按钮 退出应用的时间
     private static final long SIGNOUT_DELAY_MILLIS = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sp = getSharedPreferences("loonggg", this.MODE_PRIVATE);
 
 
         setContentView(R.layout.activity_programme);
@@ -158,6 +165,9 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 break;
             case R.id.nav_night:
                 string = "夜间模式";
+
+                //夜间模式
+                changetheme();
                 break;
             case R.id.nav_exit:
                 string = "退出";
@@ -186,8 +196,24 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.program_activity_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+//        recreate();
+
         return true;
 
+    }
+
+    private boolean changetheme() {
+        isNight = sp.getBoolean("night", false);
+        if (isNight) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            sp.edit().putBoolean("night", false).commit();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            sp.edit().putBoolean("night", true).commit();
+        }
+        recreate();
+        return true;
     }
 
     //分享
@@ -234,6 +260,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 public void onClick(View v) {
                     Toast.makeText(ProgrammeActivity.this, "你点击了english", Toast.LENGTH_LONG).show();
                     switchLanguage("en");
+
                     draw();
                 }
             });

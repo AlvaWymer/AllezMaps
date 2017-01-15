@@ -1,5 +1,6 @@
 <resources>>
 
+    <!--底部navigation 颜色-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -7,6 +8,12 @@
         <item name="android:windowFullscreen">true</item> 
         <item name="android:subtitle">true</item> 
         <item name="android:statusBarColor">@android:color/transparent</item>
+
+
+        <!--底部控制台颜色-->
+        <item name="android:navigationBarColor">@color/navigation_bar_color</item>
+    <!--<item name="android:textColorPrimary">@color/text_color_primary</item>-->
+        <!--<item name="android:colorControlNormal">@color/color_control_normal</item>-->
     </style>
 </resources>
 
