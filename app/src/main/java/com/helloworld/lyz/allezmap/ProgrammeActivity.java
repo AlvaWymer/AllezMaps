@@ -116,8 +116,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.programme, menu);
-//        menuItem = menu.findItem(R.id.nav_exit);
-//        menuItem.setVisible(true);
+
+
         return true;
     }
 
@@ -168,6 +168,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
                 //夜间模式
                 changetheme();
+
                 break;
             case R.id.nav_exit:
                 string = "退出";
@@ -194,25 +195,35 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
 
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.program_activity_drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        if (string.equals("夜间模式")) {
+        //醉了--------------
+        } else {
 
-//        recreate();
+            drawer.closeDrawer(GravityCompat.START);//控制navigation view 的显示与否的
+        }
 
+            //根据当前模式显示不同的  日间模式或者夜间模式。失败
+//        MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_night);
+//        menuItem.setTitle("======");
         return true;
 
     }
 
-    private boolean changetheme() {
+    public boolean changetheme() {
         isNight = sp.getBoolean("night", false);
         if (isNight) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             sp.edit().putBoolean("night", false).commit();
+
+
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             sp.edit().putBoolean("night", true).commit();
         }
         recreate();
+
         return true;
     }
 

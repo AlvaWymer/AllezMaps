@@ -124,6 +124,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 return;
             if (!checkPswd(mEditTextPassword.getText(), true))
                 return;
+
+
             Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -146,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (TextUtils.isEmpty(name)) {
             if (isLogin) {
                 mTextInputLayoutName.setError(" ");
-
+                //第一个参数是屏占比
                 heightToast(9, "checkname");
 
                 return false;

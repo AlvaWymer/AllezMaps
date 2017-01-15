@@ -25,6 +25,9 @@
 
     <string name="program_it_share">一键分享</string>
 
+    <string name="program_it_day_night">切换主题</string>
+    <!--<string name="program_it_night">夜间模式</string>-->
+
 
     <!--登陆模块-->
     <string name="login_bar_title">登陆页面</string>
