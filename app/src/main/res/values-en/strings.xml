@@ -28,4 +28,8 @@
     <string name="share_title">Share</string>
     <string name="about_title">About</string>
     <string name="program_it_day_night">***Switch the theme</string>
+    <string name="send_text_text">Body:</string>
+    <string name="send_text_title">Title:</string>
+    <string name="send_client_title">Choose Email Client</string>
+    <string name="program_it_opinion">****Opinion</string>
 </resources>

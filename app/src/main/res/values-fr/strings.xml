@@ -28,4 +28,8 @@
     <string name="programm_many_times_close">*****Puis une fois la procédure de retrait</string>
     <string name="share_content">****Je suis à l\'aide de AllezMap, fortement recommandé!</string>
     <string name="program_it_day_night">***Commutation de thèmes</string>
+    <string name="send_client_title">*****Le choix d\'un client de courrier électronique</string>
+    <string name="send_text_text">****Texte:</string>
+    <string name="send_text_title">****Titre:</string>
+    <string name="program_it_opinion">***La rétroaction</string>
 </resources>

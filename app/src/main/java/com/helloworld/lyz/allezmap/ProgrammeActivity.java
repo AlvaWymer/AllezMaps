@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helloworld.lyz.allezmap.util.ItemVisible;
+import com.helloworld.lyz.allezmap.util.SendMailUtil;
 import com.helloworld.lyz.allezmap.util.ShareUtil;
 
 import butterknife.ButterKnife;
@@ -184,6 +185,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 break;
             case R.id.nav_suggestion:
                 string = "意见反馈";
+                //启动邮件客户端
+                sendmail();
                 break;
             case R.id.nav_theme:
                 string = "主题风格";
@@ -198,13 +201,13 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.program_activity_drawer_layout);
         if (string.equals("夜间模式")) {
-        //醉了--------------
+            //醉了--------------
         } else {
 
             drawer.closeDrawer(GravityCompat.START);//控制navigation view 的显示与否的
         }
 
-            //根据当前模式显示不同的  日间模式或者夜间模式。失败
+        //根据当前模式显示不同的  日间模式或者夜间模式。失败
 //        MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_night);
 //        menuItem.setTitle("======");
         return true;
@@ -250,6 +253,17 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         String share_content = getResources().getString(R.string.share_content);
 
         ShareUtil.share(this, share_select_title, share_title, share_content);
+    }
+
+    //发送邮件
+    private void sendmail() {
+
+        String texttitle = getResources().getString(R.string.send_text_title);
+        String body = getResources().getString(R.string.send_text_text);
+        String clienttitle = getResources().getString(R.string.send_client_title);
+
+        SendMailUtil.sendmail(this,texttitle,body,clienttitle);
+
     }
 
     public void langage_set() {

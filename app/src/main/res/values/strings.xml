@@ -24,6 +24,8 @@
     <string name="program_it_exit">退出</string>
 
     <string name="program_it_share">一键分享</string>
+    <string name="program_it_opinion">意见反馈</string>
+
 
     <string name="program_it_day_night">切换主题</string>
     <!--<string name="program_it_night">夜间模式</string>-->
@@ -50,6 +52,11 @@
     <string name="share_title">分享</string>
     <string name="share_content">我正在使用AllezMap，强烈推荐！</string>
 
+
+    <!--发送反馈邮件的模块-->
+    <string name="send_client_title">请选择反馈使用的邮件客户端</string>
+    <string name="send_text_title">标题：</string>
+    <string name="send_text_text">正文：</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
