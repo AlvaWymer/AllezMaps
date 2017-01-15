@@ -22,4 +22,9 @@
     <string name="program_it_share">Share</string>
     <string name="login_error_name">Please check your username and try again</string>
     <string name="login_error_pass">Please check your password and try again</string>
+    <string name="share_select_title">****Please choose to share to the application</string>
+    <string name="share_content">*****I\'m using AllezMap, strongly recommended!</string>
+    <string name="programm_many_times_close">****Then click one exit procedure</string>
+    <string name="share_title">Share</string>
+    <string name="about_title">About</string>
 </resources>

@@ -24,6 +24,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helloworld.lyz.allezmap.util.ItemVisible;
+import com.helloworld.lyz.allezmap.util.ShareUtil;
+
 import butterknife.ButterKnife;
 
 /**
@@ -34,17 +37,23 @@ import butterknife.ButterKnife;
  * @desc: ProgrammeActivity   程序主页面
  */
 
-public class ProgrammeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ProgrammeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ImageView mImageView;
     private Dialog mDialog;
     private long mExitTime;
 
+    private MenuItem menuItem;
+    private NavigationView navigationView;
+
     // 双击返回按钮 退出应用的时间
     private static final long SIGNOUT_DELAY_MILLIS = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_programme);
 
         init();
@@ -61,7 +70,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         //取消navigation的bar滑动效果
         disableNavigationViewScrollbars(navigationView);
 
@@ -100,6 +109,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.programme, menu);
+//        menuItem = menu.findItem(R.id.nav_exit);
+//        menuItem.setVisible(true);
         return true;
     }
 
@@ -139,6 +150,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 break;
             case R.id.nav_share:
                 string = "一键分享";
+                share();
+
                 break;
             case R.id.nav_message:
                 string = "私信";
@@ -147,7 +160,13 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
                 string = "夜间模式";
                 break;
             case R.id.nav_exit:
-                string = "通知";
+                string = "退出";
+                //设置item隐藏
+                ItemVisible.setvisible(navigationView);
+//                navigationView = (NavigationView) findViewById(R.id.nav_view);
+//                MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_exit);
+//                menuItem.setVisible(false);    // true 为显示，false 为隐藏
+
                 break;
             case R.id.nav_setting:
                 string = "设置";
@@ -171,7 +190,32 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
     }
 
-    public  void langage_set(){
+    //分享
+    private void share() {
+        //       注意！！:首先我们知道setText接收的是字符串类型，但它也支持资源索引方式赋值。所以我们直接用索引的方式也是可以显示字符串的。
+//
+//                当你在索引的后面加上其他字符串或别的值的时候，索引就会被setText解读为一串数字。
+//
+//                这时我们可以通过这个方法将字符串的资源索引转为String类型的字符串，这样再在后面加东西，就不会被setText解读为数字。
+//
+//                getResources().getString(R.string.show);
+//                1
+//                1
+//                所以刚才的代码应该修改为：
+//
+//                textview.setText（getResources().getString(R.string.show) + "Hello"）;
+//                1
+//                1
+//                这样两个字符串都能正常显示了。
+
+        String share_select_title = getResources().getString(R.string.share_select_title);
+        String share_title = getResources().getString(R.string.share_title);
+        String share_content = getResources().getString(R.string.share_content);
+
+        ShareUtil.share(this, share_select_title, share_title, share_content);
+    }
+
+    public void langage_set() {
         Toast.makeText(ProgrammeActivity.this, "语言dialog", Toast.LENGTH_LONG).show();
         if (mDialog == null) {
             LayoutInflater inflater = getLayoutInflater();
@@ -219,7 +263,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     }
 
     //当选择语言之后，重新绘制activity
-    public void draw(){
+    public void draw() {
         //更新语言后，destroy当前页面，重新绘制
         finish();
         Intent intent = new Intent(ProgrammeActivity.this, ProgrammeActivity.class);
@@ -238,6 +282,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         NetWorkStatus();
         super.onStart();
     }
+
     // 判断网络连接 方法
     public void NetWorkStatus() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -249,23 +294,23 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         } else {
             AlertDialog.Builder aler_builder = new AlertDialog.Builder(this)
                     .setIcon(R.mipmap.ic_launcher).setTitle(R.string.login_network_title)
-                                .setMessage(R.string.login_network_message);
-                        aler_builder.setPositiveButton(R.string.login_network_setting, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
+                    .setMessage(R.string.login_network_message);
+            aler_builder.setPositiveButton(R.string.login_network_setting, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
                     /* Intent mIntent = new Intent("/"); */
-                                /**
-                                 * 判断手机系统的版本！如果API大于10 就是3.0+
-                                 * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                                 */
+                    /**
+                     * 判断手机系统的版本！如果API大于10 就是3.0+
+                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
+                     */
 
-                                Intent intent = null;
-                                /**
-                                 * 判断手机系统的版本！如果API大于10 就是3.0+
-                                 * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                                 */
-                                if (android.os.Build.VERSION.SDK_INT > 10) {
-                                    intent = new Intent(
-                                            android.provider.Settings.ACTION_WIFI_SETTINGS);
+                    Intent intent = null;
+                    /**
+                     * 判断手机系统的版本！如果API大于10 就是3.0+
+                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
+                     */
+                    if (android.os.Build.VERSION.SDK_INT > 10) {
+                        intent = new Intent(
+                                android.provider.Settings.ACTION_WIFI_SETTINGS);
                     } else {
                         intent = new Intent();
                         ComponentName component = new ComponentName(
@@ -309,6 +354,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         }
         return super.onKeyDown(keyCode, event);
     }
+
     public void onClick(View v) {
 //        switch (v.getId()) {
 //            case R.id.Button03:
@@ -329,7 +375,6 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 //            startActivity(intent);
 //        }
     }
-
 
 
 //    @OnClick(R.id.snackbar)

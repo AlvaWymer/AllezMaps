@@ -13,7 +13,8 @@
         <item
             android:id="@+id/nav_exit"
             android:title="@string/program_it_exit"
-            android:icon="@mipmap/ic_notification_gray_24"/>
+            android:icon="@mipmap/ic_notification_gray_24"
+            />
         <item
             android:id="@+id/nav_message"
             android:title="私信"

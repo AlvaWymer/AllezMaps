@@ -22,4 +22,9 @@
     <string name="program_it_share">Partager</string>
     <string name="login_error_name"> Veuillez saisir un identifiant valide</string>
     <string name="login_error_pass">Veuillez saisir un mot de passe valide</string>
+    <string name="share_select_title">****Sélectionnez l\'application à partager</string>
+    <string name="share_title">Partager</string>
+    <string name="about_title">**FR-About</string>
+    <string name="programm_many_times_close">*****Puis une fois la procédure de retrait</string>
+    <string name="share_content">****Je suis à l\'aide de AllezMap, fortement recommandé!</string>
 </resources>

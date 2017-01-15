@@ -35,7 +35,7 @@ public class AboutActivity extends AppCompatActivity {
 
     //根据当前的语言环境加载不同的url页面
     private void addlangage() {
-// 根据语言加载不同的页面，实现多语言适配
+        // 根据语言加载不同的页面，实现多语言适配
         if (getResources().getConfiguration().locale.getLanguage().equals("zh")) {
             webView.loadUrl("file:////android_asset/index_zh.html");
         } else {
