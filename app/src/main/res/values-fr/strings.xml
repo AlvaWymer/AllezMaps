@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">AllezMap</string>
     <string name="login_network_cancel">Non</string>
-    <string name="login_network_message">vous sohaitai</string>
-    <string name="login_network_title">Il n\'y pas le net</string>
+    <string name="login_network_message">Assurez-vous que Wi-Fi ou données mobiles sont activés, puis réessayez.</string>
+    <string name="login_network_title">"Aucune connexion Internet. "</string>
     <string name="login_network_setting">Paramètres</string>
     <string name="login_language">language</string>
     <string name="programm_head_welcome_and_name">Bienvenu à AllezMap!</string>
