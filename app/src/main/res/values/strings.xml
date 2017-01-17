@@ -41,6 +41,19 @@
     <string name="login_error_name">账户不能为空</string>
     <string name="login_error_pass">密码不能为空</string>
 
+    <!--忘记密码模块-->
+    <string name="forget_bar_title">找回密码</string>
+    <string name="forget_hint_email">请输入注册时的邮箱</string>
+    <string name="forget_hint_tel">请输入注册时的手机号</string>
+    <string name="forget_btn_hint_entre">确定</string>
+    <string name="forget_btn_hint_retour">重新登录</string>
+
+    <string name="forget_error_name">账户不能为空</string>
+    <string name="forget_error_email">邮箱不能为空</string>
+    <string name="forget_error_email_format">请检查邮箱格式</string>
+    <string name="forget_error_tel">电话不能为空</string>
+
+
 
     <!--关于模块-->
     <string name="about_title">关于</string>

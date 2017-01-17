@@ -20,7 +20,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.about_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.about_title);
@@ -44,7 +44,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
 
-    //对应的menu目录下面的login.xml文件中的item   选择事件
+    //返回上一级菜单
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

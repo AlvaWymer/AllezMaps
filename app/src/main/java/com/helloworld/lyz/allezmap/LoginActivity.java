@@ -1,6 +1,7 @@
 package com.helloworld.lyz.allezmap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEditTextName;
     private EditText mEditTextPassword;
     private Button mLoginButton;
+    private Button mForgetButton;
     private TextInputLayout mTextInputLayoutName;
     private TextInputLayout mTextInputLayoutPswd;
 
@@ -57,6 +59,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mLoginButton = (Button) findViewById(R.id.login_button_login);
         mLoginButton.setOnClickListener(this);
+
+        mForgetButton=(Button)findViewById(R.id.login_button_find);
+        mForgetButton.setOnClickListener(this)
+
+        ;
         mEditTextName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -70,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
-                checkName(s.toString(), false);
+                checkName(s.toString().trim(), false);
             }
         });
 
@@ -87,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
-                checkPswd(s.toString(), false);
+                checkPswd(s.toString().trim(), false);
             }
         });
     }
@@ -120,14 +127,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v.getId() == R.id.login_button_login) {
             hideKeyBoard();
-            if (!checkName(mEditTextName.getText(), true))
+//            String textnameString=mEditTextName.getText().
+            if (!checkName(mEditTextName.getText().toString().trim(), true))
                 return;
-            if (!checkPswd(mEditTextPassword.getText(), true))
+            if (!checkPswd(mEditTextPassword.getText().toString().trim(), true))
                 return;
 
 
             Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             finish();
+        }else if (v.getId() == R.id.login_button_find) {
+            Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -171,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             toast = Toast.makeText(this, R.string.login_error_name, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, height / number);
 
-        } else {
+        } else  {
             toast = Toast.makeText(this, R.string.login_error_pass, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, height / number);
         }
