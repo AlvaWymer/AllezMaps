@@ -41,7 +41,7 @@ public class PreferenceUtil {
     }
     
     public static String getString(String key, String faillValue){
-        return mSharedPreferences.getString(key, faillValue);
+            return mSharedPreferences.getString(key, faillValue);
     }
     
     public static void commitInt(String key, int value){
@@ -117,4 +117,7 @@ public class PreferenceUtil {
         //返回一个map集合
         return map;
     }
+
+
+    //系统用户数据
 }

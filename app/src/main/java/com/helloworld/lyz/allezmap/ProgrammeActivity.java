@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helloworld.lyz.allezmap.util.CheckNetUtil;
-import com.helloworld.lyz.allezmap.util.ItemVisible;
+import com.helloworld.lyz.allezmap.util.PreferenceUtil;
 import com.helloworld.lyz.allezmap.util.SendMailUtil;
 import com.helloworld.lyz.allezmap.util.ShareUtil;
 
@@ -30,7 +30,8 @@ import butterknife.ButterKnife;
 
 /**
  * Created at 2017/1/11 20:24
- *
+ *   0  是没登陆
+ *   1  已经登陆
  * @Version 1.0
  * @Author paul (yangnaihua.2008at163.com)
  * @desc: ProgrammeActivity   程序主页面
@@ -48,6 +49,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     private boolean isNight;
     private SharedPreferences sp;
 
+
     // 双击返回按钮 退出应用的时间
     private static final long SIGNOUT_DELAY_MILLIS = 2000;
 
@@ -55,13 +57,18 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //用来判断日间夜间模式
         sp = getSharedPreferences("loonggg", this.MODE_PRIVATE);
 
 
         setContentView(R.layout.activity_programme);
 
         init();
-
+        //----------------------------------------------------------------------------------
+        //保存用户登陆状态
+        PreferenceUtil.commitString("userstatus", "1");
+        Toast.makeText(ProgrammeActivity.this, PreferenceUtil.getString("userstatus","")+"---------", Toast.LENGTH_LONG).show();
+        //----------------------------------------------------------------------------------
     }
 
     public void init() {
@@ -136,6 +143,14 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+
+
+
+
+
+
+
         int id = item.getItemId();
         String string = null;
         switch (id) {
@@ -169,7 +184,9 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
             case R.id.nav_exit:
                 string = "退出";
                 //设置item隐藏
-                ItemVisible.setvisible(navigationView);
+//                ItemVisible.setvisible(navigationView);
+
+
 //                navigationView = (NavigationView) findViewById(R.id.nav_view);
 //                MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_exit);
 //                menuItem.setVisible(false);    // true 为显示，false 为隐藏
@@ -327,6 +344,23 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     @Override
     protected void onStart() {
         CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
+
+        //----------------------------------------------------------------------------------
+        //全局变量   如果用户已经登陆，那么状态码为1，如果没登录，那么状态码为0，根据用户登陆的状态，来实现
+        //程序主页面的权限控制
+        String usersatus=PreferenceUtil.getString("userstatus","");
+        if(usersatus.equals("0")){
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_exit);
+            menuItem.setVisible(false);    // true 为显示，false 为隐藏
+        }
+
+        //----------------------------------------------------------------------------------
+
+
+//        if(usersatus.equals("1")){
+//            Toast.makeText(this, "状态为1", Toast.LENGTH_SHORT).show();//不能删除
+//        }
         super.onStart();
     }
 
