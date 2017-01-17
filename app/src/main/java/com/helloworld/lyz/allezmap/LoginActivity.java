@@ -107,9 +107,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
 //                break;
                 return true;
-            case R.id.action_settings:
-                Toast.makeText(this, "点击了查找按钮", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.action_settings:
+//                Toast.makeText(this, "点击了查找按钮", Toast.LENGTH_SHORT).show();
+//                break;
 
         }
 

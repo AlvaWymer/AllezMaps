@@ -1,13 +1,8 @@
 package com.helloworld.lyz.allezmap;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
@@ -26,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helloworld.lyz.allezmap.util.CheckNetUtil;
 import com.helloworld.lyz.allezmap.util.ItemVisible;
 import com.helloworld.lyz.allezmap.util.SendMailUtil;
 import com.helloworld.lyz.allezmap.util.ShareUtil;
@@ -130,9 +126,9 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -169,7 +165,6 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
                 //夜间模式
                 changetheme();
-
                 break;
             case R.id.nav_exit:
                 string = "退出";
@@ -331,55 +326,11 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     //首次启动时  检测网络状态
     @Override
     protected void onStart() {
-        NetWorkStatus();
+        CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
         super.onStart();
     }
 
-    // 判断网络连接 方法
-    public void NetWorkStatus() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        connectivityManager.getActiveNetworkInfo();
 
-        boolean netSataus = true;
-        if (connectivityManager.getActiveNetworkInfo() != null) {
-            netSataus = connectivityManager.getActiveNetworkInfo().isAvailable();
-        } else {
-            AlertDialog.Builder aler_builder = new AlertDialog.Builder(this)
-                    .setIcon(R.mipmap.ic_launcher).setTitle(R.string.login_network_title)
-                    .setMessage(R.string.login_network_message);
-            aler_builder.setPositiveButton(R.string.login_network_setting, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    /* Intent mIntent = new Intent("/"); */
-                    /**
-                     * 判断手机系统的版本！如果API大于10 就是3.0+
-                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                     */
-
-                    Intent intent = null;
-                    /**
-                     * 判断手机系统的版本！如果API大于10 就是3.0+
-                     * 因为3.0以上的版本的设置和3.0以下的设置不一样，调用的方法不同
-                     */
-                    if (android.os.Build.VERSION.SDK_INT > 10) {
-                        intent = new Intent(
-                                android.provider.Settings.ACTION_WIFI_SETTINGS);
-                    } else {
-                        intent = new Intent();
-                        ComponentName component = new ComponentName(
-                                "com.android.settings",
-                                "com.android.settings.WirelessSettings");
-                        intent.setComponent(component);
-                        intent.setAction("android.intent.action.VIEW");
-                    }
-                    startActivity(intent);
-                }
-            }).setNeutralButton(R.string.login_network_cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    dialog.cancel();
-                }
-            }).show();
-        }
-    }
 
     //取消navigation的bar滑动效果
     private void disableNavigationViewScrollbars(NavigationView navigationView) {
