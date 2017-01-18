@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 /**
  * Created at 2017/1/11 20:19
- *
+ *程序主页面
  * @Version 1.0
  * @Author paul (yangnaihua.2008at163.com)
- * @desc: MainActivity  程序主页面
+ * @desc: MainActivity
  */
 
 public class MainActivity extends Activity {

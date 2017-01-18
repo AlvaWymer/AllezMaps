@@ -30,11 +30,12 @@ import butterknife.ButterKnife;
 
 /**
  * Created at 2017/1/11 20:24
- *   0  是没登陆
- *   1  已经登陆
+ * 程序主页面
+ *  SharedPreferences 0  是没登陆
+ *                      1  已经登陆
  * @Version 1.0
  * @Author paul (yangnaihua.2008at163.com)
- * @desc: ProgrammeActivity   程序主页面
+ * @desc: ProgrammeActivity
  */
 
 public class ProgrammeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,6 +70,11 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 //        PreferenceUtil.commitString("userstatus", "1");
 //        Toast.makeText(ProgrammeActivity.this, PreferenceUtil.getString("userstatus","")+"---------", Toast.LENGTH_LONG).show();
         //----------------------------------------------------------------------------------
+
+//        //全局检测网络  0 是不需要检测网络，1需要检测网络
+//        PreferenceUtil.commitString("checkNet", "1");
+        //检测网络
+        CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
     }
 
     public void init() {
@@ -343,7 +349,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     //首次启动时  检测网络状态
     @Override
     protected void onStart() {
-        CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
+//        CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
 
         //----------------------------------------------------------------------------------
         //全局变量   如果用户已经登陆，那么状态码为1，如果没登录，那么状态码为0，根据用户登陆的状态，来实现
@@ -353,6 +359,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_exit);
             menuItem.setVisible(false);    // true 为显示，false 为隐藏
+
 
 //            BaseActivity bas=new BaseActivity();
 //            bas.onFingerprintClick(ProgrammeActivity.this);

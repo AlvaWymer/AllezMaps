@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.helloworld.lyz.allezmap.ForgetActivity">
+    tools:context="com.helloworld.lyz.allezmap.AccountActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/forget_toolbar"
+            android:id="@+id/login_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -32,11 +32,11 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.helloworld.lyz.allezmap.ForgetActivity"
+        tools:context="com.helloworld.lyz.allezmap.AccountActivity"
         tools:showIn="@layout/app_bar_programme">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/forget_text_input_layout_name"
+            android:id="@+id/Login_text_input_layout_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -44,35 +44,16 @@
             android:layout_marginTop="30dp">
 
             <EditText
-                android:id="@+id/forget_editText_name"
+                android:id="@+id/login_editText_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/forget_hint_name"
+                android:hint="@string/login_hint_name"
                 android:textColorHint="@color/colorGray"
-                android:maxLines="1"
-                />
+                android:maxLines="1"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-        android:id="@+id/forget_text_input_layout_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp">
-
-        <EditText
-            android:id="@+id/forget_editText_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/forget_hint_email"
-            android:textColorHint="@color/colorGray"
-            android:maxLines="1"
-            />
-    </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/forget_text_input_layout_tel"
+            android:id="@+id/Login_text_input_layout_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -80,10 +61,11 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/forget_editText_tel"
+                android:id="@+id/login_editText_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/forget_hint_tel"
+                android:hint="@string/login_hint_password"
+                android:inputType="textPassword"
                 android:textColorHint="@color/colorGray"
                 android:maxLines="1"
                 />
@@ -99,26 +81,26 @@
         <!--android:background="@color/colorPrimary"/>-->
         <!--android:textAllCaps="false"  取消自动变为大写-->
         <Button
-            android:id="@+id/forget_button_entre"
+            android:id="@+id/login_button_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@color/colorPrimary"
-            android:text="@string/forget_btn_hint_entre"
+            android:text="@string/login_btn_hint_login"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textAllCaps="false"/>
         <Button
-            android:id="@+id/forget_button_retour"
+            android:id="@+id/login_button_find"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@color/colorPrimary"
-            android:text="@string/forget_btn_hint_retour"
+            android:text="@string/login_btn_hint_find"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textAllCaps="false"/>

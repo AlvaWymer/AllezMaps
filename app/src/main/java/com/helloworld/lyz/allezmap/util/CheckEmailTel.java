@@ -3,6 +3,13 @@ package com.helloworld.lyz.allezmap.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Created at 2017/1/11 20:24
+ * 检查邮箱电话合法性
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: CheckEmailTel
+ */
 
 public class CheckEmailTel {
     /**

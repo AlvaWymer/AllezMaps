@@ -16,6 +16,13 @@ import com.helloworld.lyz.allezmap.util.CheckEmailTel;
 
 import static com.helloworld.lyz.allezmap.R.id.forget_button_retour;
 
+/**
+ * Created by paul on 2017/1/15.
+ * 找回密码
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: ForgetActivity
+ */
 public class ForgetActivity extends BaseActivity implements View.OnClickListener {
 
     private Button mButtonEntre;

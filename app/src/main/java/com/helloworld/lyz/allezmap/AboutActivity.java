@@ -6,7 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.webkit.WebView;
-
+/**
+ * Created by paul on 2017/1/15.
+ * 关于页面
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: AboutActivity
+ */
 public class AboutActivity extends AppCompatActivity {
     private WebView webView;
 

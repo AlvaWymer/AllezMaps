@@ -24,6 +24,7 @@ import java.util.Locale;
 
 /**
  * Created at 2017/1/11 20:09
+ * 国际化基础类
  * @Version 1.0
  * @Author paul (yangnaihua.2008at163.com)
  * @desc: BaseActivity  国际化基础类

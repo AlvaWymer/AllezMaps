@@ -5,10 +5,14 @@ import android.content.Intent;
 
 import com.helloworld.lyz.allezmap.BaseActivity;
 
+
 /**
  * Created by paul on 2017/1/15.
+ * 反馈时打开邮件的工具类
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: SendMailUtil
  */
-
 public class SendMailUtil extends BaseActivity {
     public static void sendmail(Context context, String title, String body, String clientname) {
 //        Uri uri = Uri.parse("mailto:xxx@abc.com");

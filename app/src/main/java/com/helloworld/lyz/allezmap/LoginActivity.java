@@ -20,7 +20,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * Created by JohnTsai on 16/1/31.
+ * Created at 2017/1/11 20:11
+ *登录页面
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: LoginActivity
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 

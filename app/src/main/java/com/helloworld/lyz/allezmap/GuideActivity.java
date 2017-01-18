@@ -16,10 +16,10 @@ import java.util.List;
 
 /**
  * Created at 2017/1/11 20:11
- *
+ *导航页面
  * @Version 1.0
  * @Author paul (yangnaihua.2008at163.com)
- * @desc: GuideActivity  导航页面
+ * @desc: GuideActivity
  */
 
 public class GuideActivity extends BaseActivity implements ViewPager.OnPageChangeListener {

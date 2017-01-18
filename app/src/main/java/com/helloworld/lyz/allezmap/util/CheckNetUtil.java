@@ -12,7 +12,12 @@ import com.helloworld.lyz.allezmap.R;
 
 /**
  * Created by paul on 2017/1/17.
+ * 检查网络工具类
+ * @Version 1.0
+ * @Author paul (yangnaihua.2008at163.com)
+ * @desc: CheckEmailTel
  */
+
 
 public class CheckNetUtil extends BaseActivity {
     // 判断网络连接 方法

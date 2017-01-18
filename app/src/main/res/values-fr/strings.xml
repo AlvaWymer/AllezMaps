@@ -32,4 +32,14 @@
     <string name="send_text_text">****Texte:</string>
     <string name="send_text_title">****Titre:</string>
     <string name="program_it_opinion">***La rétroaction</string>
+    <string name="forget_bar_title">Mot de passe oublié</string>
+    <string name="forget_btn_hint_entre">**Définir</string>
+    <string name="forget_btn_hint_retour">**Reconnecter</string>
+    <string name="forget_error_email">**Boîte aux lettres ne peut pas être vide</string>
+    <string name="forget_hint_tel">**Veuillez entrer lors de l\'enregistrement du numéro de téléphone</string>
+    <string name="forget_hint_name">**Compte</string>
+    <string name="forget_hint_email">**S\'il vous plaît, lors de l\'enregistrement d\'entrée de boîte aux lettres</string>
+    <string name="forget_error_name">**Le compte ne peut pas être vide</string>
+    <string name="forget_error_email_format">**Veuillez vérifier le format boîte aux lettres</string>
+    <string name="forget_error_tel">**Le téléphone ne peut pas être vide</string>
 </resources>

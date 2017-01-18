@@ -32,4 +32,14 @@
     <string name="send_text_title">Title:</string>
     <string name="send_client_title">Choose Email Client</string>
     <string name="program_it_opinion">****Opinion</string>
+    <string name="forget_bar_title">Forgot Password</string>
+    <string name="forget_btn_hint_entre">**Confirm</string>
+    <string name="forget_btn_hint_retour">**Log back in</string>
+    <string name="forget_error_email">**Email cannot be empty</string>
+    <string name="forget_error_email_format">**Please check the email format</string>
+    <string name="forget_error_name">**Account cannot be empty</string>
+    <string name="forget_error_tel">**The phone can not be empty</string>
+    <string name="forget_hint_email">**Please enter the email address when registering</string>
+    <string name="forget_hint_name">**Name</string>
+    <string name="forget_hint_tel">**Please enter a phone number when registering</string>
 </resources>
