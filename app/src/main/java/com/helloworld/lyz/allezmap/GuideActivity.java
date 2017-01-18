@@ -1,6 +1,5 @@
 package com.helloworld.lyz.allezmap;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -23,7 +22,7 @@ import java.util.List;
  * @desc: GuideActivity  导航页面
  */
 
-public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener {
+public class GuideActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager vp;
     private ViewPagerAdapter vpAdapter;

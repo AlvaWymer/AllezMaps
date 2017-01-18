@@ -65,9 +65,9 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 
         init();
         //----------------------------------------------------------------------------------
-        //保存用户登陆状态
-        PreferenceUtil.commitString("userstatus", "1");
-        Toast.makeText(ProgrammeActivity.this, PreferenceUtil.getString("userstatus","")+"---------", Toast.LENGTH_LONG).show();
+//        //保存用户登陆状态
+//        PreferenceUtil.commitString("userstatus", "1");
+//        Toast.makeText(ProgrammeActivity.this, PreferenceUtil.getString("userstatus","")+"---------", Toast.LENGTH_LONG).show();
         //----------------------------------------------------------------------------------
     }
 
@@ -348,11 +348,14 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         //----------------------------------------------------------------------------------
         //全局变量   如果用户已经登陆，那么状态码为1，如果没登录，那么状态码为0，根据用户登陆的状态，来实现
         //程序主页面的权限控制
-        String usersatus=PreferenceUtil.getString("userstatus","");
-        if(usersatus.equals("0")){
+        String usersatus= PreferenceUtil.getString("userstatus","");
+        if(usersatus.equals("1")){
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_exit);
             menuItem.setVisible(false);    // true 为显示，false 为隐藏
+
+//            BaseActivity bas=new BaseActivity();
+//            bas.onFingerprintClick(ProgrammeActivity.this);
         }
 
         //----------------------------------------------------------------------------------
