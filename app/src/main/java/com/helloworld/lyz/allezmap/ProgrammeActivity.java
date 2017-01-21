@@ -1,11 +1,17 @@
 package com.helloworld.lyz.allezmap;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -50,31 +56,36 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     private boolean isNight;
     private SharedPreferences sp;
 
+    private  String usersatus;
+    //-------------------------------------------
 
-    // 双击返回按钮 退出应用的时间
-    private static final long SIGNOUT_DELAY_MILLIS = 2000;
+    private Context mContext = this;
+            //-------------------------------------------
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+            // 双击返回按钮 退出应用的时间
+            private static final long SIGNOUT_DELAY_MILLIS = 2000;
 
-        //用来判断日间夜间模式
-        sp = getSharedPreferences("loonggg", this.MODE_PRIVATE);
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+
+                //用来判断日间夜间模式
+                sp = getSharedPreferences("loonggg", this.MODE_PRIVATE);
 
 
-        setContentView(R.layout.activity_programme);
+                setContentView(R.layout.activity_programme);
 
-        init();
-        //----------------------------------------------------------------------------------
+                init();
+                //----------------------------------------------------------------------------------
 //        //保存用户登陆状态
 //        PreferenceUtil.commitString("userstatus", "1");
 //        Toast.makeText(ProgrammeActivity.this, PreferenceUtil.getString("userstatus","")+"---------", Toast.LENGTH_LONG).show();
-        //----------------------------------------------------------------------------------
+                //----------------------------------------------------------------------------------
 
-//        //全局检测网络  0 是不需要检测网络，1需要检测网络
-//        PreferenceUtil.commitString("checkNet", "1");
-        //检测网络
-        CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
+
+                CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
+
+//                mContext=this;
     }
 
     public void init() {
@@ -161,12 +172,16 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         String string = null;
         switch (id) {
             case R.id.nav_me:
-                string = "我";
+                string = "我的账户";
+
+              limit();
+
+
                 break;
             case R.id.nav_about:
                 string = "关于";
-                Intent intent = new Intent(ProgrammeActivity.this, AboutActivity.class);
-                startActivity(intent);
+                Intent intent_about = new Intent(ProgrammeActivity.this, AboutActivity.class);
+                startActivity(intent_about);
                 break;
             case R.id.nav_langage:
                 string = "语言";
@@ -349,31 +364,43 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     //首次启动时  检测网络状态
     @Override
     protected void onStart() {
+
+
 //        CheckNetUtil.NetWorkStatus(ProgrammeActivity.this);
 
         //----------------------------------------------------------------------------------
         //全局变量   如果用户已经登陆，那么状态码为1，如果没登录，那么状态码为0，根据用户登陆的状态，来实现
         //程序主页面的权限控制
-        String usersatus= PreferenceUtil.getString("userstatus","");
+
+        usersatus= PreferenceUtil.getString("userstatus","");
         if(usersatus.equals("1")){
+            //退出 按钮的显示与不显示
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             MenuItem menuItem = navigationView.getMenu().findItem(R.id.nav_exit);
             menuItem.setVisible(false);    // true 为显示，false 为隐藏
-
-
+//           onFingerprintClick();
 //            BaseActivity bas=new BaseActivity();
 //            bas.onFingerprintClick(ProgrammeActivity.this);
         }
 
         //----------------------------------------------------------------------------------
+    super.onStart();
+}
 
+    //检测权限
+    private void limit() {
+        //登录状态
+        usersatus= PreferenceUtil.getString("userstatus","");
+        if(usersatus.equals("1")){
+            Intent intent_account = new Intent(ProgrammeActivity.this, AccountActivity.class);
+            startActivity(intent_account);
 
-//        if(usersatus.equals("1")){
-//            Toast.makeText(this, "状态为1", Toast.LENGTH_SHORT).show();//不能删除
-//        }
-        super.onStart();
+        }else{
+            Intent intent_account = new Intent(ProgrammeActivity.this, LoginActivity.class);
+            startActivity(intent_account);
+        }
+
     }
-
 
 
     //取消navigation的bar滑动效果
@@ -402,30 +429,120 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         return super.onKeyDown(keyCode, event);
     }
 
-    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.Button03:
-//                Intent intent = new Intent(mainActivity.this, fristActivity.class);
-//                intent.putExtra("data", "mainActivity");
-//                startActivity(intent);
-//                break;
-//            case R.id.Button02:
-//                Intent intent = new Intent(mainActivity.this, loginActivity.class);
-//                intent.putExtra("data", "mainActivity");
-//                startActivity(intent);
-//                break;
-//            default:
-//                break;
-//        }
-//        if(v.getId()==R.id.ivAvatar){
-//            Intent intent = new Intent(this,Login2Activity.class);
-//            startActivity(intent);
-//        }
-    }
+
+
+
 
 
 //    @OnClick(R.id.snackbar)
 //    void goToSnackbar(){
 //        startActivity(new Intent(this,SnackBarActivity.class));
 //    }
+
+
+    public  void onFingerprintClick( ){
+
+
+
+        FingerprintUtil.callFingerPrint(new FingerprintUtil.OnCallBackListenr() {
+            AlertDialog dialog;
+            @Override
+            public void onSupportFailed() {
+                showToast(mContext,"当前设备不支持指纹");
+            }
+
+            @Override
+            public void onInsecurity() {
+                showToast(mContext,"当前设备未处于安全保护中");
+            }
+
+            @Override
+            public void onEnrollFailed() {
+                showToast(mContext,"请到设置中设置指纹");
+            }
+
+            @Override
+            public void onAuthenticationStart() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                View view = LayoutInflater.from(mContext).inflate(R.layout.fingerprint_basic,null);
+                initView(view);
+                builder.setView(view);
+                builder.setCancelable(false);
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        handler.removeMessages(0);
+                        FingerprintUtil.cancel();
+                    }
+                });
+                dialog = builder.create();
+                dialog.show();
+            }
+
+            @Override
+            public void onAuthenticationError(int errMsgId, CharSequence errString) {
+                showToast(mContext,errString.toString());
+                if (dialog != null  &&dialog.isShowing()){
+                    dialog.dismiss();
+                    handler.removeMessages(0);
+                }
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                showToast(mContext,"解锁失败");
+            }
+
+            @Override
+            public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
+                showToast(mContext,helpString.toString());
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
+                showToast(mContext,"解锁成功");
+                if (dialog != null  &&dialog.isShowing()){
+                    dialog.dismiss();
+                    handler.removeMessages(0);
+                }
+
+            }
+        });
+    }
+    private Handler handler= new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0){
+                int i = postion % 5;
+                if (i == 0){
+                    tv[4].setBackground(null);
+                    tv[i].setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                }
+                else{
+                    tv[i].setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    tv[i-1].setBackground(null);
+                }
+                postion++;
+                handler.sendEmptyMessageDelayed(0,100);
+            }
+        }
+    };
+    TextView[] tv = new TextView[5];
+    private int postion = 0;
+    private void initView(View view) {
+        postion = 0;
+        tv[0] = (TextView) view.findViewById(R.id.tv_1);
+        tv[1] = (TextView) view.findViewById(R.id.tv_2);
+        tv[2] = (TextView) view.findViewById(R.id.tv_3);
+        tv[3] = (TextView) view.findViewById(R.id.tv_4);
+        tv[4] = (TextView) view.findViewById(R.id.tv_5);
+        handler.sendEmptyMessageDelayed(0,100);
+    }
+
+
+    public void showToast(Context mContext,String name ){
+        Toast.makeText(mContext,name,Toast.LENGTH_SHORT).show();
+    }
+
 }

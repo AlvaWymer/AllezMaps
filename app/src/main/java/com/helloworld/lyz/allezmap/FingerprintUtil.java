@@ -77,7 +77,7 @@ public class FingerprintUtil {
     }
 
     public static  void cancel(){
-        if (cancellationSignal != null)
+            if (cancellationSignal != null)
             cancellationSignal.cancel();
     }
 }

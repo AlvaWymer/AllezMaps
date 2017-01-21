@@ -56,6 +56,14 @@
     <string name="forget_error_tel">电话不能为空</string>
 
 
+    <!--我的账户模块-->
+    <string name="account_hint_name">我的账户：</string>
+    <string name="account_hint_tel">我的电话：</string>
+    <string name="account_hint_mail">我的邮箱：</string>
+    <string name="account_title">我的账户</string>
+    <string name="account_btn_return">返回</string>
+
+
     <!--关于模块-->
     <string name="about_title">关于</string>
 
