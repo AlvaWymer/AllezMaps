@@ -11,11 +11,10 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".util.MyApplication"
@@ -24,7 +23,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <!--google map key-->
+
+        <!-- google map key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCM27S5QQJyri5cZ7FFbkcXlEPJJRH1DrM" />
@@ -44,7 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".MapActivity"></activity>-->
+        <!-- <activity android:name=".MapActivity"></activity> -->
         <!-- 引导页面 -->
         <activity
             android:name=".GuideActivity"
@@ -68,10 +68,11 @@
         />
         <activity android:name=".AboutActivity" />
         <activity android:name=".ForgetActivity" />
-        <activity android:name=".AccountActivity"></activity>
+        <activity android:name=".AccountActivity" />
 
-        <!--地图页面-->
+        <!-- 地图页面 -->
 
+        <activity android:name=".MapSelectActivity"></activity>
     </application>
 
 </manifest>

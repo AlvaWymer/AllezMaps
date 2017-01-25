@@ -85,4 +85,8 @@
 
 
     <string name="action_settings">设置</string>
+
+    <!--地图选择页面-->
+    <string name="map_select_title">附近</string>
+    <string name="map_btn_hint_find">搜索</string>
 </resources>

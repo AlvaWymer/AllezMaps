@@ -23,9 +23,26 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/mFloatingActionBar_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="@dimen/fab_margin"
+
+            app:srcCompat="@android:drawable/ic_dialog_map" />
 
 
     </FrameLayout>
+    <!--<ImageView-->
+    <!--android:id="@+id/imgMyLocation"-->
+    <!--android:layout_width="40dp"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:scaleType="fitXY"-->
+    <!--app:srcCompat="@android:drawable/ic_menu_directions" />-->
+    <!--主页面右下角的-->
+
 
 </RelativeLayout>
 

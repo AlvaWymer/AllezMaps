@@ -21,16 +21,18 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_programme" />
 
-    <!--主页面右下角的-->
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/mFloatingActionBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_map" />
+    <!--&lt;!&ndash;主页面右下角的&ndash;&gt;-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/mFloatingActionBar_directions"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+
+        <!--app:srcCompat="@android:drawable/ic_menu_directions" />-->
+
+    <include layout="@layout/content_programme" />
 
 
 </android.support.design.widget.CoordinatorLayout>

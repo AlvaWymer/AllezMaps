@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
@@ -28,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -67,10 +69,12 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
     private SharedPreferences sp;
 
     private String usersatus;
-    private FloatingActionButton mFloatingActionBar;
+    private FloatingActionButton mFloatingActionBarDirections;
+    private FloatingActionButton mFloatingActionBarMap;
     //-------------------------------------------
+    protected Location mLastLocation;
+    protected GoogleApiClient mGoogleApiClient;
 
-    private Context mContext = this;
     //-------------------------------------------
 
     // 双击返回按钮 退出应用的时间
@@ -135,8 +139,8 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         toggle.syncState();
 
         //mFloatingActionBar
-        mFloatingActionBar= (FloatingActionButton) findViewById(R.id.mFloatingActionBar);
-
+//        mFloatingActionBarDirections= (FloatingActionButton) findViewById(R.id.mFloatingActionBar_directions);
+        mFloatingActionBarMap= (FloatingActionButton) findViewById(R.id.mFloatingActionBar_map);
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         //取消navigation的bar滑动效果
@@ -167,17 +171,25 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
         mapFragment.getMapAsync(this);
 
 
-        mFloatingActionBar.setOnClickListener(new View.OnClickListener() {
+
+
+        mFloatingActionBarMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int PLACE_PICKER_REQUEST = 1;
-//                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                onMyLocationButtonClick();
-//                Toast.makeText(ProgrammeActivity.this, "mFloatingActionBar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProgrammeActivity.this, "mFloatingActionBarMap", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ProgrammeActivity.this, MapSelectActivity.class);
+                startActivity(intent);
             }
         });
 
     }
+
+//    private void getMyLocation() {
+////        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+////        LatLng latLng = new LatLng(Double.parseDouble(getLatitude()), Double.parseDouble(getLongitude()));
+//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18);
+//        mMap.animateCamera(cameraUpdate);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -493,6 +505,7 @@ public class ProgrammeActivity extends BaseActivity implements NavigationView.On
 @Override
 public void onMapReady(GoogleMap map) {
     mMap = map;
+//mMap.setPadding(0, 1300, 100, 100);
 
     mMap.setOnMyLocationButtonClickListener(this);
 
@@ -511,6 +524,7 @@ public void onMapReady(GoogleMap map) {
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
+//            mMap.set mMap.set
         }
     }
 
