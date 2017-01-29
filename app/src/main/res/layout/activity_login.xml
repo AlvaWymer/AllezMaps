@@ -87,6 +87,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+
             android:background="@drawable/btn_ripple_bg"
             android:text="@string/login_btn_hint_login"
             android:textColor="#ffffff"

@@ -89,4 +89,15 @@
     <!--地图选择页面-->
     <string name="map_select_title">附近</string>
     <string name="map_btn_hint_find">搜索</string>
+    <string name="map_select_hint_time">时间</string>
+    <string name="map_select_hint_date">日期</string>
+    <!--<string name="map_ed_select_hint_date">默认当前日期，点击更改</string>-->
+    <!--<string name="map_ed_select_hint_time">默认当前时间，点击更改</string>-->
+
+    <string name="map_delete_btn">删除</string>
+    <string name="map_edit_text_like">可选，输入您的偏好</string>
+    <string name="map_group_btn_my_location">我的位置</string>
+    <string name="map_group_btn_select_location">选择地址</string>
+
+
 </resources>

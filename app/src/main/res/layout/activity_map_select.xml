@@ -30,46 +30,212 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingTop="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.helloworld.lyz.allezmap.LoginActivity"
         tools:showIn="@layout/app_bar_programme">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/Login_text_input_layout_name"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp">
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/app_bar_programme">
 
-            <EditText
-                android:id="@+id/login_editText_name"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/app_bar_programme">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_month" />
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/map_select_textview_date"-->
+                <!--android:textSize="@dimen/fab_margin"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--/>-->
+                <EditText
+                    android:id="@+id/map_ed_select_date"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/fab_margin"
+                    android:gravity="center"
+                   />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/app_bar_programme">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_today" />
+                <!--<TextView-->
+                <!--android:text="@string/map_select_hint_time"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/map_select_textview_time"-->
+                <!--/>-->
+                <EditText
+                    android:id="@+id/map_ed_select_time"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/fab_margin"
+                    android:gravity="center"
+             />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/login_hint_name"
-                android:textColorHint="@color/colorGray"
-                android:maxLines="1"/>
-        </android.support.design.widget.TextInputLayout>
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/app_bar_programme">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/Login_text_input_layout_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_mylocation" />
 
-            <EditText
-                android:id="@+id/login_editText_password"
-                android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/fab_margin"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+
+                    android:orientation="horizontal"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:showIn="@layout/app_bar_programme">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+
+                        android:orientation="vertical"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        tools:showIn="@layout/app_bar_programme">
+
+                        <RadioGroup
+                            android:id="@+id/map_select_location_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+
+                            <RadioButton
+                                android:id="@+id/map_my_location_rad_btn"
+                                android:layout_width="240dp"
+                                android:textSize="20dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/map_group_btn_my_location"
+                                android:gravity="center"
+
+                               />
+
+
+                            <RadioButton
+                                android:id="@+id/map_other_location_rad_btn"
+                                android:layout_width="240dp"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginTop="15dp"
+                                android:text="@string/map_group_btn_select_location"
+                                android:textSize="20dp"
+                                android:gravity="center"/>
+
+
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:background="@android:drawable/ic_menu_add"
+                            android:id="@+id/map_imageview_add_mylocation"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="15dp"
+                            android:background="@android:drawable/ic_menu_add"
+                            android:id="@+id/map_imageview_add_otherlocation"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <com.helloworld.lyz.allezmap.MapSlideCutListView
+                android:id="@+id/slideCutListView"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/login_hint_password"
-                android:inputType="textPassword"
-                android:textColorHint="@color/colorGray"
-                android:maxLines="1"
-                />
-        </android.support.design.widget.TextInputLayout>
+
+                android:paddingLeft="0dp"
+                android:listSelector="@android:color/transparent"
+                android:cacheColorHint="@android:color/transparent"
+                android:layout_marginLeft="70dp"
+                android:gravity="left"
+                android:scrollbars="none"
+
+                >
+            </com.helloworld.lyz.allezmap.MapSlideCutListView>
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="80dp"-->
+                <!--android:text="fdasf" />-->
+        </LinearLayout>
+
+
+
 
         <!--<CheckBox-->
         <!--android:layout_width="match_parent"-->
@@ -80,46 +246,52 @@
         <!--android:layout_marginRight="20dp"-->
         <!--android:background="@color/colorPrimary"/>-->
         <!--android:textAllCaps="false"  取消自动变为大写-->
-        <RadioButton
-            android:text="RadioButton"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/radioButton" />
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:paddingTop="0dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <CheckedTextView
-            android:text="CheckedTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkedTextView" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_menu_compass" />
+            <!--<TextView-->
+            <!--android:text="@string/map_select_hint_time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/map_select_textview_time"-->
+            <!--/>-->
+            <EditText
+                android:id="@+id/map_ed_select_like"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:gravity="center"
+                android:hint="@string/map_edit_text_like"
+                />
 
-        <Button
-            android:id="@+id/login_button_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/btn_ripple_bg"
-            android:drawableTop="@drawable/ic_cast_dark"
-
-            android:text="@string/login_btn_hint_login"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textAllCaps="false"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/map_button_find"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btn_ripple_bg"
 
             android:text="@string/map_btn_hint_find"
+            android:textAllCaps="false"
             android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textAllCaps="false"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 

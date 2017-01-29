@@ -85,7 +85,7 @@ public class BaseActivity extends AppCompatActivity implements SearchView.OnClos
 
     @Override
     protected void onStart() {
-        Toast.makeText(this, "baseactivity=============", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "baseactivity=============", Toast.LENGTH_LONG).show();
 
         //----------------------------------------------------------------------------------
         //全局变量   如果用户已经登陆，那么状态码为1，如果没登录，那么状态码为0，根据用户登陆的状态，来实现
