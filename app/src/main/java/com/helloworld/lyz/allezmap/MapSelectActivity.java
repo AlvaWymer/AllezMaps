@@ -2,10 +2,12 @@ package com.helloworld.lyz.allezmap;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,8 +21,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,7 +57,8 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 //    listview
     private MapSlideCutListView mapSlideCutListView;
     private ArrayAdapter<String> mAdapter;
-    private List<String> mDatas;
+    //数据
+    private List<String> mDatas =new ArrayList<String>();
     //======================
 //单选按钮
     //对控件对象进行声明
@@ -59,6 +68,14 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
     //imageview 添加
     private ImageView map_imageview_add_mylocation;
     private ImageView map_imageview_add_otherlocation;
+
+
+    /**
+     * Request code for the autocomplete activity. This will be used to identify results from the
+     * autocomplete activity in onActivityResult.
+     */
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,8 +160,8 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 //====================listview
 
 
-        //listview 数据
-        mDatas = new ArrayList<String>();
+//        //listview 数据
+//        mDatas = new ArrayList<String>();
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -166,7 +183,7 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                                 maplistview();
                             }
                             else{
-                                Toast.makeText(MapSelectActivity.this, "最多支持四个地址 ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MapSelectActivity.this, "最多支持四个地址!", Toast.LENGTH_LONG).show();
 
 
                             }
@@ -183,11 +200,13 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(MapSelectActivity.this, "map_imageview_add_otherlocation ", Toast.LENGTH_LONG).show();
+
                             if (mDatas.size()<=3){
-                                mDatas.add("数据2");
-                                maplistview();
+                                openAutocompleteActivity();
+//                                mDatas.add("数据2");
+//                                maplistview();
                             }else{
-                                Toast.makeText(MapSelectActivity.this, "最多支持四个地址 ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MapSelectActivity.this, "最多支持四个地址", Toast.LENGTH_LONG).show();
 
 
                             }
@@ -200,8 +219,71 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
         });
 
 
-//            maplistview();
 
+
+    }
+
+    //打开搜索地址的页面
+    private void openAutocompleteActivity() {
+
+        try {
+            // The autocomplete activity requires Google Play Services to be available. The intent
+            // builder checks this and throws an exception if it is not the case.
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                    .build(this);
+            startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Indicates that Google Play Services is either not installed or not up to date. Prompt
+            // the user to correct the issue.
+            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
+                    0 /* requestCode */).show();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            // Indicates that Google Play Services is not available and the problem is not easily
+            // resolvable.
+            String message = "Google Play Services is not available: " +
+                    GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
+
+//            Log.e(TAG, message);
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    /**
+     * Called after the autocomplete activity has finished to return its result.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check that the result was from the autocomplete widget.
+        if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+            if (resultCode == RESULT_OK) {
+                // Get the user's selected place from the Intent.
+                Place place = PlaceAutocomplete.getPlace(this, data);
+//                返回的结果
+//                Log.i(TAG, "Place Selected: " + place.getName());
+                Toast.makeText(this, place.getName()+place.getAddress().toString()+"！！！！", Toast.LENGTH_SHORT).show();
+
+                //填充数据  listview
+                mDatas.add(place.getName().toString().trim()+place.getAddress().toString().trim());
+                maplistview();
+
+
+//                mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
+//                        place.getId(), place.getAddress(), place.getPhoneNumber(),
+//                        place.getWebsiteUri(),place.getLatLng()));
+
+                CharSequence attributions = place.getAttributions();
+                if (!TextUtils.isEmpty(attributions)) {
+                } else {
+                }
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+            } else if (resultCode == RESULT_CANCELED) {
+
+            }
+        }
     }
 
     private void maplistview() {
@@ -292,7 +374,8 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 //                    mLastLocation.getLatitude()));
 //            mLongitudeText.setText(String.format("%s: %f", mLongitudeLabel,
 //                    mLastLocation.getLongitude()));
-            String str = mLastLocation.getLongitude() + "" + mLastLocation.getLatitude();
+
+            String str = mLastLocation.getLongitude() + "" + mLastLocation.getLatitude()+ mLastLocation.getProvider();
 
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             return str;
