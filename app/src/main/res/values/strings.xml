@@ -100,4 +100,9 @@
     <string name="map_group_btn_select_location">选择地址</string>
 
 
+    <string name="map_reminder_four_adresse">不好意思哟，目前最多支持四个地址呢！</string>
+
+
+
+
 </resources>

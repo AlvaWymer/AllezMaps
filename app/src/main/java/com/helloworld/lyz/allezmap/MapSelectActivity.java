@@ -1,10 +1,13 @@
 package com.helloworld.lyz.allezmap;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +33,8 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.helloworld.lyz.allezmap.util.CheckNetUtil;
+import com.helloworld.lyz.allezmap.util.JsonNetUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,12 +46,10 @@ import static com.helloworld.lyz.allezmap.R.id.map_other_location_rad_btn;
 public class MapSelectActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
     protected static final String TAG = "MainActivity";
-
     /**
      * Provides the entry point to Google Play services.
      */
     protected GoogleApiClient mGoogleApiClient;
-
     /**
      * Represents a geographical location.
      */
@@ -58,7 +62,7 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
     private MapSlideCutListView mapSlideCutListView;
     private ArrayAdapter<String> mAdapter;
     //数据
-    private List<String> mDatas =new ArrayList<String>();
+    private List<String> mDatas = new ArrayList<String>();
     //======================
 //单选按钮
     //对控件对象进行声明
@@ -68,13 +72,18 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
     //imageview 添加
     private ImageView map_imageview_add_mylocation;
     private ImageView map_imageview_add_otherlocation;
-
-
     /**
      * Request code for the autocomplete activity. This will be used to identify results from the
      * autocomplete activity in onActivityResult.
      */
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
+
+    private Button map_button_find;
+    private EditText map_ed_select_like;
+
+
+    private  int RADIO_GROUP=0;
+
 
 
     @Override
@@ -84,6 +93,8 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 
         init();
         buildGoogleApiClient();
+        //检测网络
+        CheckNetUtil.NetWorkStatus(MapSelectActivity.this);
     }
 
     private void init() {
@@ -105,6 +116,11 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
         //image view
         map_imageview_add_mylocation = (ImageView) findViewById(R.id.map_imageview_add_mylocation);
         map_imageview_add_otherlocation = (ImageView) findViewById(R.id.map_imageview_add_otherlocation);
+
+//        搜索按钮
+        map_button_find = (Button) findViewById(R.id.map_button_find);
+        map_ed_select_like = (EditText) findViewById(R.id.map_ed_select_like);
+
         //时间
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -158,19 +174,14 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
             }
         });
 //====================listview
-
-
 //        //listview 数据
-//        mDatas = new ArrayList<String>();
-
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // TODO Auto-generated method stub
                 //当前位置
                 if (checkedId == map_my_location_rad_btn) {
-                   final String mapData= obtenirLocation();
+                    final String mapData = obtenirLocation();
 
                     map_imageview_add_otherlocation.setClickable(false);
                     //添加当前位置
@@ -178,20 +189,15 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                         @Override
                         public void onClick(View v) {
 //                            Toast.makeText(MapSelectActivity.this, "map_imageview_add_mylocation ", Toast.LENGTH_LONG).show();
-                            if (mDatas.size()<=3){
+                            if (mDatas.size() <= 3) {
                                 mDatas.add(mapData.toString().trim());
                                 maplistview();
-                            }
-                            else{
-                                Toast.makeText(MapSelectActivity.this, "最多支持四个地址!", Toast.LENGTH_LONG).show();
-
-
+                            } else {
+                                Toast.makeText(MapSelectActivity.this, R.string.map_reminder_four_adresse, Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-
-
-//                    Toast.makeText(MapSelectActivity.this,   "map_my_location_rad_btn " , Toast.LENGTH_LONG).show();
+                    RADIO_GROUP=1;
                 } else if (checkedId == map_other_location_rad_btn) {
                     Toast.makeText(MapSelectActivity.this, "map_other_location_rad_btn ", Toast.LENGTH_LONG).show();
                     map_imageview_add_mylocation.setClickable(false);
@@ -201,24 +207,58 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                         public void onClick(View v) {
                             Toast.makeText(MapSelectActivity.this, "map_imageview_add_otherlocation ", Toast.LENGTH_LONG).show();
 
-                            if (mDatas.size()<=3){
+                            if (mDatas.size() <= 3) {
                                 openAutocompleteActivity();
 //                                mDatas.add("数据2");
 //                                maplistview();
-                            }else{
-                                Toast.makeText(MapSelectActivity.this, "最多支持四个地址", Toast.LENGTH_LONG).show();
-
-
+                            } else {
+                                Toast.makeText(MapSelectActivity.this, R.string.map_reminder_four_adresse, Toast.LENGTH_LONG).show();
                             }
 
 
                         }
                     });
+                    RADIO_GROUP=2;
                 }
             }
         });
+        map_button_find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                int str=radioGroup.getCheckedRadioButtonId();
+
+                String edtext = map_ed_select_like.getText().toString().trim();
+
+                //如果没有选择的rafiogroup 按钮的话
+                if(RADIO_GROUP==0){
+                    Toast.makeText(MapSelectActivity.this, "亲，对不起，你还没有选择位置", Toast.LENGTH_LONG).show();
+                }
+//                如果选择了我的位置的话
+                else if (RADIO_GROUP==1){
+//                    获取当前的位置信息
+                    String str=obtenirLocation();
+                    Toast.makeText(MapSelectActivity.this, str+"-----"+RADIO_GROUP, Toast.LENGTH_LONG).show();
+                    JsonNetUtil.connectNear(str,null);
+                }
+//                如果选择了选择地址的话
+                    else if (RADIO_GROUP==2){
+
+//                        Toast.makeText(MapSelectActivity.this, "你还没有选择位置"+RADIO_GROUP, Toast.LENGTH_LONG).show();
 
 
+                }
+//                ||radioGroup.getCheckedRadioButtonId()!=0
+//                if (mDatas.size() == 0) {
+//                    Toast.makeText(MapSelectActivity.this, "请完善信息", Toast.LENGTH_LONG).show();
+//
+//                }
+                else if(mDatas.size() == 1){
+                  mDatas.get(0);
+                    Toast.makeText(MapSelectActivity.this,  mDatas.get(0)+"999999999", Toast.LENGTH_LONG).show();
+//                    JsonNetUtil.connectNear();
+                }
+            }
+        });
 
 
     }
@@ -263,17 +303,14 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                 Place place = PlaceAutocomplete.getPlace(this, data);
 //                返回的结果
 //                Log.i(TAG, "Place Selected: " + place.getName());
-                Toast.makeText(this, place.getName()+place.getAddress().toString()+"！！！！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, place.getName() + place.getAddress().toString() + "！！！！", Toast.LENGTH_SHORT).show();
 
                 //填充数据  listview
-                mDatas.add(place.getName().toString().trim()+place.getAddress().toString().trim());
+                mDatas.add(place.getName().toString().trim() + place.getAddress().toString().trim());
                 maplistview();
-
-
 //                mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
 //                        place.getId(), place.getAddress(), place.getPhoneNumber(),
 //                        place.getWebsiteUri(),place.getLatLng()));
-
                 CharSequence attributions = place.getAttributions();
                 if (!TextUtils.isEmpty(attributions)) {
                 } else {
@@ -293,11 +330,9 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 //        mDatas = new ArrayList<String>(Arrays.asList("HelloWorld", "Welcome", "Java", "HelloWorld"));
 //        mDatas.add("0000");
 
-            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDatas);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDatas);
 
-            mapSlideCutListView.setAdapter(mAdapter);
-
-
+        mapSlideCutListView.setAdapter(mAdapter);
 
 
         mapSlideCutListView.setDelButtonClickListener(new MapSlideCutListView.DelButtonClickListener() {
@@ -368,6 +403,17 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
         // applications that do not require a fine-grained location and that do not need location
         // updates. Gets the best and most recent location currently available, which may be null
         // in rare cases when a location is not available.
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+        }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
 //            mLatitudeText.setText(String.format("%s: %f", mLatitudeLabel,
@@ -375,7 +421,7 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 //            mLongitudeText.setText(String.format("%s: %f", mLongitudeLabel,
 //                    mLastLocation.getLongitude()));
 
-            String str = mLastLocation.getLongitude() + "" + mLastLocation.getLatitude()+ mLastLocation.getProvider();
+            String str =  mLastLocation.getLatitude()+ "," + mLastLocation.getLongitude() ;
 
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             return str;
