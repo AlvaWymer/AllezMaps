@@ -61,8 +61,11 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 //    listview
     private MapSlideCutListView mapSlideCutListView;
     private ArrayAdapter<String> mAdapter;
-    //数据
+    //数据 存储地名
     private List<String> mDatas = new ArrayList<String>();
+
+    //    辅助数据，为了获取里面的经纬度  存储经纬度
+    private List<String> lngDatas = new ArrayList<String>();
     //======================
 //单选按钮
     //对控件对象进行声明
@@ -82,8 +85,7 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
     private EditText map_ed_select_like;
 
 
-    private  int RADIO_GROUP=0;
-
+    private int RADIO_GROUP = 0;
 
 
     @Override
@@ -190,22 +192,23 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                         public void onClick(View v) {
 //                            Toast.makeText(MapSelectActivity.this, "map_imageview_add_mylocation ", Toast.LENGTH_LONG).show();
                             if (mDatas.size() <= 3) {
-                                mDatas.add(mapData.toString().trim());
+                                mDatas.add("我的位置");
+                                lngDatas.add(mapData.toString().trim());
                                 maplistview();
                             } else {
                                 Toast.makeText(MapSelectActivity.this, R.string.map_reminder_four_adresse, Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-                    RADIO_GROUP=1;
+                    RADIO_GROUP = 1;
                 } else if (checkedId == map_other_location_rad_btn) {
-                    Toast.makeText(MapSelectActivity.this, "map_other_location_rad_btn ", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MapSelectActivity.this, "map_other_location_rad_btn ", Toast.LENGTH_LONG).show();
                     map_imageview_add_mylocation.setClickable(false);
 
                     map_imageview_add_otherlocation.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(MapSelectActivity.this, "map_imageview_add_otherlocation ", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(MapSelectActivity.this, "map_imageview_add_otherlocation ", Toast.LENGTH_LONG).show();
 
                             if (mDatas.size() <= 3) {
                                 openAutocompleteActivity();
@@ -218,7 +221,7 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 
                         }
                     });
-                    RADIO_GROUP=2;
+                    RADIO_GROUP = 2;
                 }
             }
         });
@@ -230,33 +233,42 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                 String edtext = map_ed_select_like.getText().toString().trim();
 
                 //如果没有选择的rafiogroup 按钮的话
-                if(RADIO_GROUP==0){
+                if (RADIO_GROUP == 0) {
                     Toast.makeText(MapSelectActivity.this, "亲，对不起，你还没有选择位置", Toast.LENGTH_LONG).show();
                 }
 //                如果选择了我的位置的话
-                else if (RADIO_GROUP==1){
+                else if (RADIO_GROUP == 1) {
 //                    获取当前的位置信息
-                    String str=obtenirLocation();
-                    Toast.makeText(MapSelectActivity.this, str+"-----"+RADIO_GROUP, Toast.LENGTH_LONG).show();
-                    JsonNetUtil.connectNear(str,null);
+                    String str = obtenirLocation();
+                    Toast.makeText(MapSelectActivity.this, str + "-----" + RADIO_GROUP, Toast.LENGTH_LONG).show();
+                    JsonNetUtil.connectNearOne(str, edtext);
                 }
 //                如果选择了选择地址的话
-                    else if (RADIO_GROUP==2){
+                else if (RADIO_GROUP == 2) {
+//                    有可能加了之后又删除了
+                    if (mDatas.size() == 0) {
 
+                        Toast.makeText(MapSelectActivity.this, "请确认地址的有效性", Toast.LENGTH_LONG).show();
+                    }
+
+
+                    if (mDatas.size() == 1) {
+                        String str = lngDatas.get(0);
+//                            Toast.makeText(MapSelectActivity.this, str+"@@@@", Toast.LENGTH_LONG).show();
+
+                        JsonNetUtil.connectNearOne(str, edtext);
+
+                    }
+//                mDatas.get()
 //                        Toast.makeText(MapSelectActivity.this, "你还没有选择位置"+RADIO_GROUP, Toast.LENGTH_LONG).show();
 
 
                 }
-//                ||radioGroup.getCheckedRadioButtonId()!=0
-//                if (mDatas.size() == 0) {
-//                    Toast.makeText(MapSelectActivity.this, "请完善信息", Toast.LENGTH_LONG).show();
-//
+//                else if(mDatas.size() == 1){
+//                  mDatas.get(0);
+//                    Toast.makeText(MapSelectActivity.this,  mDatas.get(0)+"999999999", Toast.LENGTH_LONG).show();
+////                    JsonNetUtil.connectNear();
 //                }
-                else if(mDatas.size() == 1){
-                  mDatas.get(0);
-                    Toast.makeText(MapSelectActivity.this,  mDatas.get(0)+"999999999", Toast.LENGTH_LONG).show();
-//                    JsonNetUtil.connectNear();
-                }
             }
         });
 
@@ -303,10 +315,15 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
                 Place place = PlaceAutocomplete.getPlace(this, data);
 //                返回的结果
 //                Log.i(TAG, "Place Selected: " + place.getName());
-                Toast.makeText(this, place.getName() + place.getAddress().toString() + "！！！！", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, place.getName() + place.getAddress().toString() + "！！！！", Toast.LENGTH_SHORT).show();
 
                 //填充数据  listview
-                mDatas.add(place.getName().toString().trim() + place.getAddress().toString().trim());
+                mDatas.add(place.getAddress().toString().trim());
+                //截取字符串
+                String a[] = place.getLatLng().toString().trim().split("\\(");
+                String b[] = a[1].toString().trim().split("\\)");
+
+                lngDatas.add(b[0]);
                 maplistview();
 //                mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
 //                        place.getId(), place.getAddress(), place.getPhoneNumber(),
@@ -338,15 +355,18 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
         mapSlideCutListView.setDelButtonClickListener(new MapSlideCutListView.DelButtonClickListener() {
             @Override
             public void clickHappend(final int position) {
-                Toast.makeText(MapSelectActivity.this, position + " : " + mAdapter.getItem(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(MapSelectActivity.this, position + " : " + mAdapter.getItem(position), Toast.LENGTH_LONG).show();
                 mAdapter.remove(mAdapter.getItem(position));
+
+
+                lngDatas.remove(0);
             }
         });
 
         mapSlideCutListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MapSelectActivity.this, position + " : " + mAdapter.getItem(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(MapSelectActivity.this, position + " : " + mAdapter.getItem(position), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -421,13 +441,11 @@ public class MapSelectActivity extends BaseActivity implements GoogleApiClient.C
 //            mLongitudeText.setText(String.format("%s: %f", mLongitudeLabel,
 //                    mLastLocation.getLongitude()));
 
-            String str =  mLastLocation.getLatitude()+ "," + mLastLocation.getLongitude() ;
+            String str = mLastLocation.getLatitude() + "," + mLastLocation.getLongitude();
 
-            Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             return str;
 
         } else {
-//            Toast.makeText(this, R.string.no_location_detected, Toast.LENGTH_LONG).show();
             return null;
         }
 
